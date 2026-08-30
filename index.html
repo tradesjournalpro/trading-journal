@@ -731,5 +731,21 @@ loadJournal();
 
 updateAll();
 
-</script></body>
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://mwbubdeqytnyrdxfunuk.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_n02CS7Ch1X3MxJ503D6lzA_HPG6FYSl";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
+
+console.log("TradeJournal: Supabase connected");
+</script>
+
+</body>
 </html>
