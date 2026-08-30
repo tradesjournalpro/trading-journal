@@ -1,41 +1,22 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TradeJournal Pro</title><style>
+<title>TradeJournal Pro</title>
+
+<style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background:#080d18;color:#f8fafc;min-height:100vh}
 button,input,select,textarea{font:inherit}
-<div id="authScreen" style="display:none;min-height:100vh;background:#080d18;align-items:center;justify-content:center;padding:20px;">
-  <div style="width:100%;max-width:420px;background:#0f172a;border:1px solid #1e293b;border-radius:14px;padding:25px;">
-    
-    <h1 style="margin-bottom:8px;">Trade<span style="color:#22c55e;">Journal</span></h1>
-    <p style="color:#94a3b8;margin-bottom:22px;">Sign in to your trading journal</p>
 
-    <input id="authEmail" type="email" placeholder="Email address"
-      style="width:100%;margin-bottom:12px;padding:12px;background:#080d18;color:white;border:1px solid #334155;border-radius:8px;">
-
-    <input id="authPassword" type="password" placeholder="Password"
-      style="width:100%;margin-bottom:12px;padding:12px;background:#080d18;color:white;border:1px solid #334155;border-radius:8px;">
-
-    <button onclick="signIn()" style="width:100%;padding:12px;background:#22c55e;border:0;border-radius:8px;font-weight:bold;cursor:pointer;">
-      Sign In
-    </button>
-
-    <button onclick="signUp()" style="width:100%;margin-top:10px;padding:12px;background:#162033;color:white;border:1px solid #334155;border-radius:8px;cursor:pointer;">
-      Create Account
-    </button>
-
-    <p id="authMessage" style="margin-top:15px;color:#94a3b8;font-size:13px;"></p>
-
-  </div>
-</div>
 header{
   height:64px;background:#0f172a;border-bottom:1px solid #1e293b;
   display:flex;align-items:center;justify-content:space-between;
   padding:0 22px;position:fixed;top:0;left:0;right:0;z-index:10
 }
-.logo{font-size:21px;font-weight:800}.logo span{color:#22c55e}
+.logo{font-size:21px;font-weight:800}
+.logo span{color:#22c55e}
 .user{font-size:13px;color:#94a3b8}
 
 .sidebar{
@@ -52,7 +33,9 @@ header{
 
 main{margin-left:220px;padding:94px 25px 40px;max-width:1400px}
 
-.page{display:none}.page.active{display:block}
+.page{display:none}
+.page.active{display:block}
+
 .title{font-size:28px;font-weight:800;margin-bottom:6px}
 .subtitle{color:#64748b;margin-bottom:25px}
 
@@ -66,7 +49,9 @@ main{margin-left:220px;padding:94px 25px 40px;max-width:1400px}
 }
 .label{font-size:12px;color:#64748b;margin-bottom:9px}
 .value{font-size:25px;font-weight:800}
-.green{color:#22c55e}.red{color:#ef4444}.muted{color:#94a3b8}
+.green{color:#22c55e}
+.red{color:#ef4444}
+.muted{color:#94a3b8}
 
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .section{
@@ -79,12 +64,18 @@ main{margin-left:220px;padding:94px 25px 40px;max-width:1400px}
   display:grid;grid-template-columns:repeat(2,1fr);gap:15px
 }
 .full{grid-column:1/-1}
-label{display:block;color:#94a3b8;font-size:12px;margin-bottom:7px}
+
+label{
+  display:block;color:#94a3b8;font-size:12px;margin-bottom:7px
+}
+
 input,select,textarea{
   width:100%;background:#080d18;border:1px solid #334155;
   color:#fff;border-radius:8px;padding:12px;outline:none
 }
-input:focus,select:focus,textarea:focus{border-color:#22c55e}
+input:focus,select:focus,textarea:focus{
+  border-color:#22c55e
+}
 textarea{min-height:100px;resize:vertical}
 
 .btn{
@@ -92,7 +83,10 @@ textarea{min-height:100px;resize:vertical}
   padding:12px 18px;font-weight:800;cursor:pointer
 }
 .btn:hover{opacity:.9}
-.btn-danger{background:#ef4444;color:#fff;padding:7px 10px;font-size:12px}
+
+.btn-danger{
+  background:#ef4444;color:#fff;padding:7px 10px;font-size:12px
+}
 
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:720px}
@@ -103,7 +97,8 @@ td{font-size:13px}
 .empty{text-align:center;color:#64748b;padding:30px}
 
 .progress{
-  height:8px;background:#1e293b;border-radius:20px;overflow:hidden;margin-top:12px
+  height:8px;background:#1e293b;border-radius:20px;
+  overflow:hidden;margin-top:12px
 }
 .progress-bar{height:100%;background:#22c55e;width:0}
 
@@ -128,6 +123,50 @@ td{font-size:13px}
 
 footer{text-align:center;color:#475569;font-size:12px;padding:25px}
 
+/* AUTH */
+#authScreen{
+  display:none;
+  min-height:100vh;
+  background:#080d18;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.auth-box{
+  width:100%;
+  max-width:420px;
+  background:#0f172a;
+  border:1px solid #1e293b;
+  border-radius:14px;
+  padding:25px;
+}
+
+.auth-box h1{
+  margin-bottom:8px;
+}
+
+.auth-box p{
+  color:#94a3b8;
+}
+
+.auth-input{
+  margin-bottom:12px;
+}
+
+.auth-btn{
+  width:100%;
+}
+
+.auth-message{
+  margin-top:15px;
+  font-size:13px;
+}
+
+#app{
+  display:none;
+}
+
 @media(max-width:900px){
   .sidebar{width:70px}
   .nav-btn{font-size:0;text-align:center;padding:15px 5px}
@@ -147,404 +186,1622 @@ footer{text-align:center;color:#475569;font-size:12px;padding:25px}
   .form-grid{grid-template-columns:1fr}
   .full{grid-column:auto}
 }
-</style></head><body><header>
-  <div class="logo">Trade<span>Journal</span> Pro</div>
-  <div class="user">● Local Journal</div>
-</header><aside class="sidebar"><button class="nav-btn active" onclick="showPage('dashboard',this)">🏠 Dashboard</button>
+</style>
+</head>
 
-<button class="nav-btn" onclick="showPage('trades',this)">📋 Trades</button>
+<body>
 
-<button class="nav-btn" onclick="showPage('add',this)">➕ Add Trade</button>
+<!-- ================= AUTH SCREEN ================= -->
 
-<button class="nav-btn" onclick="showPage('analytics',this)">📊 Analytics</button>
+<div id="authScreen">
 
-<button class="nav-btn" onclick="showPage('journal',this)">🧠 Journal</button>
+  <div class="auth-box">
 
-<button class="nav-btn" onclick="showPage('settings',this)">⚙️ Settings</button>
+    <h1>Trade<span style="color:#22c55e;">Journal</span></h1>
 
-</aside><main><!-- DASHBOARD --><section id="dashboard" class="page active">  <div class="title">Trading Dashboard</div>  <div class="subtitle">
-    Review your performance and trading consistency.
-  </div>  <div class="stats"><div class="card">
-  <div class="label">TOTAL TRADES</div>
-  <div class="value" id="totalTrades">0</div>
+    <p style="margin-bottom:22px;">
+      Sign in to your trading journal
+    </p>
+
+    <input
+      class="auth-input"
+      id="authEmail"
+      type="email"
+      placeholder="Email address"
+    >
+
+    <input
+      class="auth-input"
+      id="authPassword"
+      type="password"
+      placeholder="Password"
+    >
+
+    <button
+      class="btn auth-btn"
+      onclick="signIn()"
+    >
+      Sign In
+    </button>
+
+    <button
+      class="auth-btn"
+      onclick="signUp()"
+      style="margin-top:10px;padding:12px;background:#162033;color:white;border:1px solid #334155;border-radius:8px;cursor:pointer;"
+    >
+      Create Account
+    </button>
+
+    <p
+      id="authMessage"
+      class="auth-message"
+    ></p>
+
+  </div>
+
+</div>
+
+
+<!-- ================= MAIN APP ================= -->
+
+<div id="app">
+
+<header>
+
+  <div class="logo">
+    Trade<span>Journal</span> Pro
+  </div>
+
+  <div class="user">
+    <span id="loggedUser">● Logged in</span>
+    &nbsp;
+    <button
+      onclick="signOut()"
+      style="background:transparent;border:0;color:#ef4444;cursor:pointer;"
+    >
+      Logout
+    </button>
+  </div>
+
+</header>
+
+
+<aside class="sidebar">
+
+<button class="nav-btn active"
+onclick="showPage('dashboard',this)">
+🏠 Dashboard
+</button>
+
+<button class="nav-btn"
+onclick="showPage('trades',this)">
+📋 Trades
+</button>
+
+<button class="nav-btn"
+onclick="showPage('add',this)">
+➕ Add Trade
+</button>
+
+<button class="nav-btn"
+onclick="showPage('analytics',this)">
+📊 Analytics
+</button>
+
+<button class="nav-btn"
+onclick="showPage('journal',this)">
+🧠 Journal
+</button>
+
+<button class="nav-btn"
+onclick="showPage('settings',this)">
+⚙️ Settings
+</button>
+
+</aside>
+
+
+<main>
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="page active">
+
+<div class="title">
+Trading Dashboard
+</div>
+
+<div class="subtitle">
+Review your performance and trading consistency.
+</div>
+
+
+<div class="stats">
+
+<div class="card">
+<div class="label">TOTAL TRADES</div>
+<div class="value" id="totalTrades">0</div>
 </div>
 
 <div class="card">
-  <div class="label">WIN RATE</div>
-  <div class="value green" id="winRate">0%</div>
+<div class="label">WIN RATE</div>
+<div class="value green" id="winRate">0%</div>
 </div>
 
 <div class="card">
-  <div class="label">NET P/L</div>
-  <div class="value" id="netProfit">$0.00</div>
+<div class="label">NET P/L</div>
+<div class="value" id="netProfit">$0.00</div>
 </div>
 
 <div class="card">
-  <div class="label">PROFIT FACTOR</div>
-  <div class="value" id="profitFactor">0.00</div>
+<div class="label">PROFIT FACTOR</div>
+<div class="value" id="profitFactor">0.00</div>
 </div>
 
-  </div>  <div class="grid2"><div class="section">
-
-  <h2>Performance</h2>
-
-  <div class="metric">
-    <span class="muted">Winning trades</span>
-    <strong class="green" id="wins">0</strong>
-  </div>
-
-  <div class="metric">
-    <span class="muted">Losing trades</span>
-    <strong class="red" id="losses">0</strong>
-  </div>
-
-  <div class="metric">
-    <span class="muted">Average win</span>
-    <strong id="avgWin">$0.00</strong>
-  </div>
-
-  <div class="metric">
-    <span class="muted">Average loss</span>
-    <strong id="avgLoss">$0.00</strong>
-  </div>
-
 </div>
+
+
+<div class="grid2">
+
 
 <div class="section">
 
-  <h2>Trading Consistency</h2>
+<h2>Performance</h2>
 
-  <div class="metric">
-    <span class="muted">Largest win</span>
-    <strong class="green" id="largestWin">$0.00</strong>
-  </div>
+<div class="metric">
+<span class="muted">Winning trades</span>
+<strong class="green" id="wins">0</strong>
+</div>
 
-  <div class="metric">
-    <span class="muted">Largest loss</span>
-    <strong class="red" id="largestLoss">$0.00</strong>
-  </div>
+<div class="metric">
+<span class="muted">Losing trades</span>
+<strong class="red" id="losses">0</strong>
+</div>
 
-  <div class="metric">
-    <span class="muted">Current streak</span>
-    <strong id="streak">0</strong>
-  </div>
+<div class="metric">
+<span class="muted">Average win</span>
+<strong id="avgWin">$0.00</strong>
+</div>
 
-  <div class="progress">
-    <div class="progress-bar" id="progressBar"></div>
-  </div>
+<div class="metric">
+<span class="muted">Average loss</span>
+<strong id="avgLoss">$0.00</strong>
+</div>
 
 </div>
 
-  </div>  <div class="section"><h2>Recent Trades</h2>
+
+<div class="section">
+
+<h2>Trading Consistency</h2>
+
+<div class="metric">
+<span class="muted">Largest win</span>
+<strong class="green" id="largestWin">$0.00</strong>
+</div>
+
+<div class="metric">
+<span class="muted">Largest loss</span>
+<strong class="red" id="largestLoss">$0.00</strong>
+</div>
+
+<div class="metric">
+<span class="muted">Current streak</span>
+<strong id="streak">0</strong>
+</div>
+
+<div class="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<h2>Recent Trades</h2>
 
 <div class="table-wrap">
 
-  <table>
+<table>
 
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Symbol</th>
-        <th>Direction</th>
-        <th>P/L</th>
-      </tr>
-    </thead>
+<thead>
 
-    <tbody id="recentTrades"></tbody>
+<tr>
+<th>Date</th>
+<th>Symbol</th>
+<th>Direction</th>
+<th>P/L</th>
+</tr>
 
-  </table>
+</thead>
 
-</div>
+<tbody id="recentTrades"></tbody>
 
-  </div></section><!-- TRADES --><section id="trades" class="page">  <div class="title">Trade History</div>  <div class="subtitle">
-    All recorded trades.
-  </div>  <div class="section"><div class="table-wrap">
-
-  <table>
-
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Symbol</th>
-        <th>Direction</th>
-        <th>Entry</th>
-        <th>Exit</th>
-        <th>P/L</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-
-    <tbody id="tradeTable"></tbody>
-
-  </table>
+</table>
 
 </div>
 
-  </div></section><!-- ADD TRADE --><section id="add" class="page">  <div class="title">Add Trade</div>  <div class="subtitle">
-    Record a trade manually for testing.
-  </div>  <div class="section"><div class="form-grid">
-
-  <div>
-    <label>Date</label>
-    <input type="date" id="tradeDate">
-  </div>
-
-  <div>
-    <label>Symbol</label>
-    <input id="symbol" placeholder="XAUUSD">
-  </div>
-
-  <div>
-    <label>Direction</label>
-    <select id="direction">
-      <option>Buy</option>
-      <option>Sell</option>
-    </select>
-  </div>
-
-  <div>
-    <label>Entry Price</label>
-    <input type="number" step="any" id="entry">
-  </div>
-
-  <div>
-    <label>Exit Price</label>
-    <input type="number" step="any" id="exit">
-  </div>
-
-  <div>
-    <label>Profit / Loss ($)</label>
-    <input type="number" step="any" id="profit">
-  </div>
-
-  <div>
-    <label>Strategy</label>
-    <select id="strategy">
-      <option>Scalping</option>
-      <option>Breakout</option>
-      <option>Trend Following</option>
-      <option>Liquidity Sweep</option>
-      <option>Other</option>
-    </select>
-  </div>
-
-  <div>
-    <label>Emotion</label>
-    <select id="emotion">
-      <option>Confident</option>
-      <option>Calm</option>
-      <option>Fearful</option>
-      <option>Greedy</option>
-      <option>FOMO</option>
-      <option>Revenge</option>
-    </select>
-  </div>
-
-  <div class="full">
-    <label>Trade Notes</label>
-    <textarea id="notes"
-      placeholder="Why did you take the trade? What went well? What went wrong?"></textarea>
-  </div>
-
-  <div class="full">
-    <button class="btn" onclick="addTrade()">Save Trade</button>
-  </div>
-
 </div>
 
-  </div></section><!-- ANALYTICS --><section id="analytics" class="page">  <div class="title">Analytics</div>  <div class="subtitle">
-    Analyze your trading performance.
-  </div>  <div class="grid2"><div class="section">
+</section>
 
-  <h2>Trade Statistics</h2>
 
-  <div class="metric">
-    <span class="muted">Total trades</span>
-    <strong id="aTotal">0</strong>
-  </div>
+<!-- TRADES -->
 
-  <div class="metric">
-    <span class="muted">Win rate</span>
-    <strong id="aWinRate">0%</strong>
-  </div>
+<section id="trades" class="page">
 
-  <div class="metric">
-    <span class="muted">Profit factor</span>
-    <strong id="aPF">0.00</strong>
-  </div>
+<div class="title">
+Trade History
+</div>
 
-  <div class="metric">
-    <span class="muted">Net profit</span>
-    <strong id="aNet">$0.00</strong>
-  </div>
-
+<div class="subtitle">
+All recorded trades.
 </div>
 
 <div class="section">
 
-  <h2>Outcomes</h2>
+<div class="table-wrap">
 
-  <div class="stat-box">
+<table>
 
-    <div class="small-card">
-      <div class="label">WINS</div>
-      <div class="value green" id="aWins">0</div>
-    </div>
+<thead>
 
-    <div class="small-card">
-      <div class="label">LOSSES</div>
-      <div class="value red" id="aLosses">0</div>
-    </div>
+<tr>
+<th>Date</th>
+<th>Symbol</th>
+<th>Direction</th>
+<th>Entry</th>
+<th>Exit</th>
+<th>P/L</th>
+<th>Action</th>
+</tr>
 
-  </div>
+</thead>
+
+<tbody id="tradeTable"></tbody>
+
+</table>
 
 </div>
 
-  </div></section><!-- JOURNAL --><section id="journal" class="page">  <div class="title">Trading Journal</div>  <div class="subtitle">
-    Keep track of your mindset and lessons.
-  </div>  <div class="section"><label>Daily Reflection</label>
+</div>
 
-<textarea id="dailyJournal"
-  placeholder="How did you trade today? What did you learn?"></textarea>
+</section>
+
+
+<!-- ADD TRADE -->
+
+<section id="add" class="page">
+
+<div class="title">
+Add Trade
+</div>
+
+<div class="subtitle">
+Record a trade manually.
+</div>
+
+<div class="section">
+
+<div class="form-grid">
+
+
+<div>
+
+<label>Date</label>
+
+<input
+type="date"
+id="tradeDate"
+>
+
+</div>
+
+
+<div>
+
+<label>Symbol</label>
+
+<input
+id="symbol"
+placeholder="XAUUSD"
+>
+
+</div>
+
+
+<div>
+
+<label>Direction</label>
+
+<select id="direction">
+
+<option>Buy</option>
+<option>Sell</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>Entry Price</label>
+
+<input
+type="number"
+step="any"
+id="entry"
+>
+
+</div>
+
+
+<div>
+
+<label>Exit Price</label>
+
+<input
+type="number"
+step="any"
+id="exit"
+>
+
+</div>
+
+
+<div>
+
+<label>Lot Size</label>
+
+<input
+type="number"
+step="any"
+id="lotSize"
+>
+
+</div>
+
+
+<div>
+
+<label>Stop Loss</label>
+
+<input
+type="number"
+step="any"
+id="stopLoss"
+>
+
+</div>
+
+
+<div>
+
+<label>Take Profit</label>
+
+<input
+type="number"
+step="any"
+id="takeProfit"
+>
+
+</div>
+
+
+<div>
+
+<label>Profit / Loss ($)</label>
+
+<input
+type="number"
+step="any"
+id="profit"
+>
+
+</div>
+
+
+<div>
+
+<label>Strategy</label>
+
+<select id="strategy">
+
+<option>Scalping</option>
+<option>Breakout</option>
+<option>Trend Following</option>
+<option>Liquidity Sweep</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>Emotion</label>
+
+<select id="emotion">
+
+<option>Confident</option>
+<option>Calm</option>
+<option>Fearful</option>
+<option>Greedy</option>
+<option>FOMO</option>
+<option>Revenge</option>
+
+</select>
+
+</div>
+
+
+<div class="full">
+
+<label>Trade Notes</label>
+
+<textarea
+id="notes"
+placeholder="Why did you take the trade? What went well? What went wrong?"
+></textarea>
+
+</div>
+
+
+<div class="full">
+
+<button
+class="btn"
+onclick="addTrade()"
+>
+Save Trade
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ANALYTICS -->
+
+<section id="analytics" class="page">
+
+<div class="title">
+Analytics
+</div>
+
+<div class="subtitle">
+Analyze your trading performance.
+</div>
+
+
+<div class="grid2">
+
+
+<div class="section">
+
+<h2>Trade Statistics</h2>
+
+<div class="metric">
+<span class="muted">Total trades</span>
+<strong id="aTotal">0</strong>
+</div>
+
+<div class="metric">
+<span class="muted">Win rate</span>
+<strong id="aWinRate">0%</strong>
+</div>
+
+<div class="metric">
+<span class="muted">Profit factor</span>
+<strong id="aPF">0.00</strong>
+</div>
+
+<div class="metric">
+<span class="muted">Net profit</span>
+<strong id="aNet">$0.00</strong>
+</div>
+
+</div>
+
+
+<div class="section">
+
+<h2>Outcomes</h2>
+
+<div class="stat-box">
+
+<div class="small-card">
+
+<div class="label">
+WINS
+</div>
+
+<div
+class="value green"
+id="aWins"
+>
+0
+</div>
+
+</div>
+
+
+<div class="small-card">
+
+<div class="label">
+LOSSES
+</div>
+
+<div
+class="value red"
+id="aLosses"
+>
+0
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- JOURNAL -->
+
+<section id="journal" class="page">
+
+<div class="title">
+Trading Journal
+</div>
+
+<div class="subtitle">
+Keep track of your mindset and lessons.
+</div>
+
+
+<div class="section">
+
+<label>
+Daily Reflection
+</label>
+
+<textarea
+id="dailyJournal"
+placeholder="How did you trade today? What did you learn?"
+></textarea>
 
 <br>
 
-<button class="btn" onclick="saveJournal()">Save Reflection</button>
-
-  </div>  <div class="section"><h2>Trading Rules</h2>
-
-<div class="metric">
-  <span>Risk management</span>
-  <span class="tag">Protect capital</span>
-</div>
-
-<div class="metric">
-  <span>Patience</span>
-  <span class="tag">Wait for setup</span>
-</div>
-
-<div class="metric">
-  <span>Discipline</span>
-  <span class="tag">Follow the plan</span>
-</div>
-
-  </div></section><!-- SETTINGS --><section id="settings" class="page">  <div class="title">Settings</div>  <div class="subtitle">
-    Journal preferences.
-  </div>  <div class="section"><h2>Account</h2>
-
-<div class="metric">
-  <span class="muted">Connection</span>
-  <strong class="green">Local</strong>
-</div>
-
-<div class="metric">
-  <span class="muted">MT5 Integration</span>
-  <strong class="muted">Coming later</strong>
-</div>
-
-  </div>  <div class="section"><h2>Data</h2>
-
-<button class="btn btn-danger" onclick="clearAllTrades()">
-  Delete All Trades
+<button
+class="btn"
+onclick="saveJournal()"
+>
+Save Reflection
 </button>
 
-  </div></section><footer>
+</div>
+
+
+<div class="section">
+
+<h2>
+Trading Rules
+</h2>
+
+<div class="metric">
+
+<span>
+Risk management
+</span>
+
+<span class="tag">
+Protect capital
+</span>
+
+</div>
+
+<div class="metric">
+
+<span>
+Patience
+</span>
+
+<span class="tag">
+Wait for setup
+</span>
+
+</div>
+
+<div class="metric">
+
+<span>
+Discipline
+</span>
+
+<span class="tag">
+Follow the plan
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SETTINGS -->
+
+<section id="settings" class="page">
+
+<div class="title">
+Settings
+</div>
+
+<div class="subtitle">
+Journal preferences.
+</div>
+
+
+<div class="section">
+
+<h2>
+Account
+</h2>
+
+<div class="metric">
+
+<span class="muted">
+Connection
+</span>
+
+<strong class="green">
+Supabase Cloud
+</strong>
+
+</div>
+
+<div class="metric">
+
+<span class="muted">
+Account
+</span>
+
+<strong
+class="muted"
+id="settingsEmail"
+>
+-
+</strong>
+
+</div>
+
+<div class="metric">
+
+<span class="muted">
+MT5 Integration
+</span>
+
+<strong class="muted">
+Coming later
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<h2>
+Data
+</h2>
+
+<button
+class="btn btn-danger"
+onclick="clearAllTrades()"
+>
+Delete All Trades
+</button>
+
+</div>
+
+</section>
+
+
+<footer>
 TradeJournal Pro © 2026
-</footer></main><script>
+</footer>
 
-let trades = JSON.parse(localStorage.getItem("tj_trades")) || [];
+</main>
 
-function money(value){
-  return (value >= 0 ? "+" : "") + "$" + value.toFixed(2);
-}
+</div>
 
-function showPage(page,button){
 
-  document.querySelectorAll(".page")
-    .forEach(p => p.classList.remove("active"));
+<!-- SUPABASE -->
 
-  document.getElementById(page)
-    .classList.add("active");
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  document.querySelectorAll(".nav-btn")
-    .forEach(b => b.classList.remove("active"));
+<script>
 
-  button.classList.add("active");
+const SUPABASE_URL =
+"https://mwbubdeqytnyrdxfunuk.supabase.co";
 
-  updateAll();
-}
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_n02CS7Ch1X3MxJ503D6lzA_HPG6FYSl";
 
-function addTrade(){
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
 
-  const date = document.getElementById("tradeDate").value;
-  const symbol = document.getElementById("symbol").value.trim();
-  const direction = document.getElementById("direction").value;
-  const entry = document.getElementById("entry").value;
-  const exit = document.getElementById("exit").value;
-  const profit = parseFloat(document.getElementById("profit").value);
-  const strategy = document.getElementById("strategy").value;
-  const emotion = document.getElementById("emotion").value;
-  const notes = document.getElementById("notes").value;
 
-  if(!date || !symbol || isNaN(profit)){
-    alert("Please enter the date, symbol and profit/loss.");
+let trades = [];
+let currentUser = null;
+
+
+/* ================= AUTH ================= */
+
+async function signUp(){
+
+  const email =
+    document.getElementById("authEmail").value.trim();
+
+  const password =
+    document.getElementById("authPassword").value;
+
+  const message =
+    document.getElementById("authMessage");
+
+
+  if(!email || !password){
+
+    message.textContent =
+      "Enter your email and password.";
+
     return;
   }
 
-  trades.push({
-    id:Date.now(),
-    date,
-    symbol:symbol.toUpperCase(),
-    direction,
-    entry,
-    exit,
-    profit,
-    strategy,
-    emotion,
-    notes
-  });
 
-  localStorage.setItem("tj_trades",JSON.stringify(trades));
+  if(password.length < 6){
+
+    message.textContent =
+      "Password must be at least 6 characters.";
+
+    return;
+  }
+
+
+  message.textContent =
+    "Creating account...";
+
+
+  const { data, error } =
+    await supabaseClient.auth.signUp({
+
+      email: email,
+      password: password,
+
+      options:{
+        emailRedirectTo:
+          window.location.href
+      }
+
+    });
+
+
+  if(error){
+
+    message.textContent =
+      error.message;
+
+    return;
+  }
+
+
+  if(data.session){
+
+    message.textContent =
+      "Account created successfully.";
+
+  }else{
+
+    message.textContent =
+      "Account created. Check your email to verify your account.";
+
+  }
+
+}
+
+
+async function signIn(){
+
+  const email =
+    document.getElementById("authEmail").value.trim();
+
+  const password =
+    document.getElementById("authPassword").value;
+
+  const message =
+    document.getElementById("authMessage");
+
+
+  if(!email || !password){
+
+    message.textContent =
+      "Enter your email and password.";
+
+    return;
+  }
+
+
+  message.textContent =
+    "Signing in...";
+
+
+  const { data, error } =
+    await supabaseClient.auth.signInWithPassword({
+
+      email: email,
+      password: password
+
+    });
+
+
+  if(error){
+
+    message.textContent =
+      error.message;
+
+    return;
+  }
+
+
+  currentUser =
+    data.user;
+
+  await showApp();
+
+}
+
+
+async function signOut(){
+
+  await supabaseClient.auth.signOut();
+
+  trades = [];
+  currentUser = null;
+
+  document.getElementById("app").style.display =
+    "none";
+
+  document.getElementById("authScreen").style.display =
+    "flex";
+
+}
+
+
+/* ================= AUTH CHECK ================= */
+
+async function checkAuth(){
+
+  const {
+    data: { session }
+  } =
+  await supabaseClient.auth.getSession();
+
+
+  if(session){
+
+    currentUser =
+      session.user;
+
+    await showApp();
+
+  }else{
+
+    document.getElementById("authScreen").style.display =
+      "flex";
+
+    document.getElementById("app").style.display =
+      "none";
+
+  }
+
+}
+
+
+supabaseClient.auth.onAuthStateChange(
+  async (event, session) => {
+
+    if(session){
+
+      currentUser =
+        session.user;
+
+      await showApp();
+
+    }else{
+
+      currentUser =
+        null;
+
+      document.getElementById("app").style.display =
+        "none";
+
+      document.getElementById("authScreen").style.display =
+        "flex";
+
+    }
+
+  }
+);
+
+
+/* ================= APP ================= */
+
+async function showApp(){
+
+  document.getElementById("authScreen").style.display =
+    "none";
+
+  document.getElementById("app").style.display =
+    "block";
+
+
+  if(currentUser){
+
+    document.getElementById("loggedUser").textContent =
+      "● " + currentUser.email;
+
+    document.getElementById("settingsEmail").textContent =
+      currentUser.email;
+
+  }
+
+
+  await loadTrades();
+
+  loadJournal();
+
+  updateAll();
+
+}
+
+
+/* ================= LOAD TRADES ================= */
+
+async function loadTrades(){
+
+  if(!currentUser){
+
+    trades = [];
+
+    return;
+  }
+
+
+  const {
+    data,
+    error
+  } =
+  await supabaseClient
+    .from("trades")
+    .select("*")
+    .eq("user_id", currentUser.id)
+    .order("open_time", { ascending:true });
+
+
+  if(error){
+
+    console.error(error);
+
+    alert(
+      "Could not load your trades: " +
+      error.message
+    );
+
+    trades = [];
+
+    return;
+  }
+
+
+  trades =
+    (data || []).map(t => ({
+
+      id: t.id,
+
+      date:
+        t.open_time
+        ? t.open_time.substring(0,10)
+        : "",
+
+      symbol:
+        t.symbol || "",
+
+      direction:
+        t.direction || "",
+
+      entry:
+        t.entry_price,
+
+      exit:
+        t.exit_price,
+
+      lotSize:
+        t.lot_size,
+
+      stopLoss:
+        t.stop_loss,
+
+      takeProfit:
+        t.take_profit,
+
+      profit:
+        Number(t.profit_loss || 0),
+
+      strategy:
+        t.strategy || "",
+
+      emotion:
+        t.emotion || "",
+
+      notes:
+        t.notes || "",
+
+      open_time:
+        t.open_time,
+
+      close_time:
+        t.close_time
+
+    }));
+
+}
+
+
+/* ================= ADD TRADE ================= */
+
+async function addTrade(){
+
+  if(!currentUser){
+
+    alert("Please sign in first.");
+
+    return;
+  }
+
+
+  const date =
+    document.getElementById("tradeDate").value;
+
+  const symbol =
+    document.getElementById("symbol").value.trim();
+
+  const direction =
+    document.getElementById("direction").value;
+
+  const entry =
+    document.getElementById("entry").value;
+
+  const exit =
+    document.getElementById("exit").value;
+
+  const lotSize =
+    document.getElementById("lotSize").value;
+
+  const stopLoss =
+    document.getElementById("stopLoss").value;
+
+  const takeProfit =
+    document.getElementById("takeProfit").value;
+
+  const profit =
+    parseFloat(
+      document.getElementById("profit").value
+    );
+
+  const strategy =
+    document.getElementById("strategy").value;
+
+  const emotion =
+    document.getElementById("emotion").value;
+
+  const notes =
+    document.getElementById("notes").value;
+
+
+  if(
+    !date ||
+    !symbol ||
+    isNaN(profit)
+  ){
+
+    alert(
+      "Please enter the date, symbol and profit/loss."
+    );
+
+    return;
+  }
+
+
+  const openTime =
+    new Date(date + "T00:00:00").toISOString();
+
+
+  const tradeData = {
+
+    user_id:
+      currentUser.id,
+
+    symbol:
+      symbol.toUpperCase(),
+
+    direction:
+      direction,
+
+    entry_price:
+      entry ? Number(entry) : null,
+
+    exit_price:
+      exit ? Number(exit) : null,
+
+    lot_size:
+      lotSize ? Number(lotSize) : null,
+
+    stop_loss:
+      stopLoss ? Number(stopLoss) : null,
+
+    take_profit:
+      takeProfit ? Number(takeProfit) : null,
+
+    profit_loss:
+      profit,
+
+    open_time:
+      openTime,
+
+    close_time:
+      exit ? openTime : null,
+
+    strategy:
+      strategy,
+
+    notes:
+      notes
+
+  };
+
+
+  const {
+    error
+  } =
+  await supabaseClient
+    .from("trades")
+    .insert([tradeData]);
+
+
+  if(error){
+
+    console.error(error);
+
+    alert(
+      "Trade could not be saved: " +
+      error.message
+    );
+
+    return;
+  }
+
 
   document.getElementById("symbol").value="";
   document.getElementById("entry").value="";
   document.getElementById("exit").value="";
+  document.getElementById("lotSize").value="";
+  document.getElementById("stopLoss").value="";
+  document.getElementById("takeProfit").value="";
   document.getElementById("profit").value="";
   document.getElementById("notes").value="";
 
+
   alert("Trade saved successfully.");
 
-  updateAll();
-}
-
-function deleteTrade(id){
-
-  trades=trades.filter(t=>t.id!==id);
-
-  localStorage.setItem("tj_trades",JSON.stringify(trades));
+  await loadTrades();
 
   updateAll();
+
 }
 
-function clearAllTrades(){
 
-  if(confirm("Delete ALL trades? This cannot be undone.")){
+/* ================= DELETE TRADE ================= */
 
-    trades=[];
+async function deleteTrade(id){
 
-    localStorage.removeItem("tj_trades");
+  if(!currentUser){
 
-    updateAll();
+    return;
   }
+
+
+  if(!confirm("Delete this trade?")){
+
+    return;
+  }
+
+
+  const {
+    error
+  } =
+  await supabaseClient
+    .from("trades")
+    .delete()
+    .eq("id", id)
+    .eq("user_id", currentUser.id);
+
+
+  if(error){
+
+    alert(
+      "Could not delete trade: " +
+      error.message
+    );
+
+    return;
+  }
+
+
+  await loadTrades();
+
+  updateAll();
+
 }
+
+
+/* ================= DELETE ALL ================= */
+
+async function clearAllTrades(){
+
+  if(!currentUser){
+
+    return;
+  }
+
+
+  if(!confirm(
+    "Delete ALL your trades? This cannot be undone."
+  )){
+
+    return;
+  }
+
+
+  const {
+    error
+  } =
+  await supabaseClient
+    .from("trades")
+    .delete()
+    .eq("user_id", currentUser.id);
+
+
+  if(error){
+
+    alert(
+      "Could not delete trades: " +
+      error.message
+    );
+
+    return;
+  }
+
+
+  trades = [];
+
+  updateAll();
+
+}
+
+
+/* ================= NAVIGATION ================= */
+
+function showPage(page,button){
+
+  document.querySelectorAll(".page")
+    .forEach(p =>
+      p.classList.remove("active")
+    );
+
+
+  document.getElementById(page)
+    .classList.add("active");
+
+
+  document.querySelectorAll(".nav-btn")
+    .forEach(b =>
+      b.classList.remove("active")
+    );
+
+
+  button.classList.add("active");
+
+
+  updateAll();
+
+}
+
+
+/* ================= MONEY ================= */
+
+function money(value){
+
+  value =
+    Number(value || 0);
+
+  return (
+    value >= 0 ? "+" : ""
+  )
+  + "$"
+  + value.toFixed(2);
+
+}
+
+
+/* ================= STATS ================= */
+
+function updateStats(){
+
+  const total =
+    trades.length;
+
+
+  const wins =
+    trades.filter(
+      t => Number(t.profit) > 0
+    );
+
+
+  const losses =
+    trades.filter(
+      t => Number(t.profit) < 0
+    );
+
+
+  const net =
+    trades.reduce(
+      (s,t) =>
+        s + Number(t.profit || 0),
+      0
+    );
+
+
+  const grossWin =
+    wins.reduce(
+      (s,t) =>
+        s + Number(t.profit || 0),
+      0
+    );
+
+
+  const grossLoss =
+    Math.abs(
+      losses.reduce(
+        (s,t) =>
+          s + Number(t.profit || 0),
+        0
+      )
+    );
+
+
+  const winRate =
+    total
+    ? (wins.length / total) * 100
+    : 0;
+
+
+  const pf =
+    grossLoss
+    ? grossWin / grossLoss
+    : 0;
+
+
+  const avgWin =
+    wins.length
+    ? grossWin / wins.length
+    : 0;
+
+
+  const avgLoss =
+    losses.length
+    ? grossLoss / losses.length
+    : 0;
+
+
+  const largestWin =
+    wins.length
+    ? Math.max(
+        ...wins.map(
+          t => Number(t.profit)
+        )
+      )
+    : 0;
+
+
+  const largestLoss =
+    losses.length
+    ? Math.min(
+        ...losses.map(
+          t => Number(t.profit)
+        )
+      )
+    : 0;
+
+
+  document.getElementById("totalTrades")
+    .textContent = total;
+
+
+  document.getElementById("winRate")
+    .textContent =
+      winRate.toFixed(1) + "%";
+
+
+  const netElement =
+    document.getElementById("netProfit");
+
+
+  netElement.textContent =
+    money(net);
+
+
+  netElement.className =
+    "value " +
+    (
+      net >= 0
+      ? "green"
+      : "red"
+    );
+
+
+  document.getElementById("profitFactor")
+    .textContent =
+      pf.toFixed(2);
+
+
+  document.getElementById("wins")
+    .textContent =
+      wins.length;
+
+
+  document.getElementById("losses")
+    .textContent =
+      losses.length;
+
+
+  document.getElementById("avgWin")
+    .textContent =
+      "$" + avgWin.toFixed(2);
+
+
+  document.getElementById("avgLoss")
+    .textContent =
+      "-$" + avgLoss.toFixed(2);
+
+
+  document.getElementById("largestWin")
+    .textContent =
+      "$" + largestWin.toFixed(2);
+
+
+  document.getElementById("largestLoss")
+    .textContent =
+      "$" + largestLoss.toFixed(2);
+
+
+  document.getElementById("aTotal")
+    .textContent =
+      total;
+
+
+  document.getElementById("aWinRate")
+    .textContent =
+      winRate.toFixed(1) + "%";
+
+
+  document.getElementById("aPF")
+    .textContent =
+      pf.toFixed(2);
+
+
+  document.getElementById("aNet")
+    .textContent =
+      money(net);
+
+
+  document.getElementById("aWins")
+    .textContent =
+      wins.length;
+
+
+  document.getElementById("aLosses")
+    .textContent =
+      losses.length;
+
+
+  document.getElementById("progressBar")
+    .style.width =
+      Math.min(
+        winRate,
+        100
+      ) + "%";
+
+
+  calculateStreak();
+
+}
+
+
+/* ================= STREAK ================= */
+
+function calculateStreak(){
+
+  let streak = 0;
+
+
+  for(
+    let i = trades.length - 1;
+    i >= 0;
+    i--
+  ){
+
+    if(
+      Number(trades[i].profit) > 0
+    ){
+
+      streak++;
+
+    }else{
+
+      break;
+
+    }
+
+  }
+
+
+  document.getElementById("streak")
+    .textContent =
+      streak + " wins";
+
+}
+
+
+/* ================= RENDER TRADES ================= */
 
 function renderTrades(){
 
-  const table=document.getElementById("tradeTable");
+  const table =
+    document.getElementById("tradeTable");
 
-  if(trades.length===0){
 
-    table.innerHTML=`
+  if(!trades.length){
+
+    table.innerHTML = `
       <tr>
         <td colspan="7" class="empty">
           No trades recorded yet.
@@ -554,192 +1811,184 @@ function renderTrades(){
     return;
   }
 
-  table.innerHTML="";
 
-  [...trades].reverse().forEach(t=>{
+  table.innerHTML = "";
 
-    const cls=t.profit>=0?"green":"red";
 
-    table.innerHTML+=`
+  [...trades]
+    .reverse()
+    .forEach(t => {
+
+      const cls =
+        Number(t.profit) >= 0
+        ? "green"
+        : "red";
+
+
+      table.innerHTML += `
+
       <tr>
-        <td>${t.date}</td>
-        <td><strong>${t.symbol}</strong></td>
-        <td>${t.direction}</td>
-        <td>${t.entry||"-"}</td>
-        <td>${t.exit||"-"}</td>
-        <td class="${cls}">${money(t.profit)}</td>
+
+        <td>${t.date || "-"}</td>
+
         <td>
-          <button class="btn btn-danger"
-          onclick="deleteTrade(${t.id})">Delete</button>
+          <strong>${t.symbol}</strong>
         </td>
+
+        <td>${t.direction}</td>
+
+        <td>${t.entry ?? "-"}</td>
+
+        <td>${t.exit ?? "-"}</td>
+
+        <td class="${cls}">
+          ${money(Number(t.profit))}
+        </td>
+
+        <td>
+
+          <button
+            class="btn btn-danger"
+            onclick="deleteTrade(${t.id})"
+          >
+            Delete
+          </button>
+
+        </td>
+
       </tr>`;
-  });
-}
 
-function updateStats(){
-
-  const total=trades.length;
-
-  const wins=trades.filter(t=>t.profit>0);
-
-  const losses=trades.filter(t=>t.profit<0);
-
-  const net=trades.reduce((s,t)=>s+t.profit,0);
-
-  const grossWin=wins.reduce((s,t)=>s+t.profit,0);
-
-  const grossLoss=Math.abs(
-    losses.reduce((s,t)=>s+t.profit,0)
-  );
-
-  const winRate=total
-    ? ((wins.length/total)*100)
-    : 0;
-
-  const pf=grossLoss
-    ? grossWin/grossLoss
-    : 0;
-
-  const avgWin=wins.length
-    ? grossWin/wins.length
-    : 0;
-
-  const avgLoss=losses.length
-    ? grossLoss/losses.length
-    : 0;
-
-  const largestWin=wins.length
-    ? Math.max(...wins.map(t=>t.profit))
-    : 0;
-
-  const largestLoss=losses.length
-    ? Math.min(...losses.map(t=>t.profit))
-    : 0;
-
-  document.getElementById("totalTrades").textContent=total;
-
-  document.getElementById("winRate").textContent=
-    winRate.toFixed(1)+"%";
-
-  const netElement=document.getElementById("netProfit");
-
-  netElement.textContent=money(net);
-
-  netElement.className="value "+(net>=0?"green":"red");
-
-  document.getElementById("profitFactor")
-    .textContent=pf.toFixed(2);
-
-  document.getElementById("wins")
-    .textContent=wins.length;
-
-  document.getElementById("losses")
-    .textContent=losses.length;
-
-  document.getElementById("avgWin")
-    .textContent="$"+avgWin.toFixed(2);
-
-  document.getElementById("avgLoss")
-    .textContent="-$"+avgLoss.toFixed(2);
-
-  document.getElementById("largestWin")
-    .textContent="$"+largestWin.toFixed(2);
-
-  document.getElementById("largestLoss")
-    .textContent="$"+largestLoss.toFixed(2);
-
-  document.getElementById("aTotal")
-    .textContent=total;
-
-  document.getElementById("aWinRate")
-    .textContent=winRate.toFixed(1)+"%";
-
-  document.getElementById("aPF")
-    .textContent=pf.toFixed(2);
-
-  document.getElementById("aNet")
-    .textContent=money(net);
-
-  document.getElementById("aWins")
-    .textContent=wins.length;
-
-  document.getElementById("aLosses")
-    .textContent=losses.length;
-
-  document.getElementById("progressBar")
-    .style.width=Math.min(winRate,100)+"%";
-
-  calculateStreak();
+    });
 
 }
 
-function calculateStreak(){
 
-  let streak=0;
-
-  for(let i=trades.length-1;i>=0;i--){
-
-    if(trades[i].profit>0)
-      streak++;
-
-    else
-      break;
-  }
-
-  document.getElementById("streak")
-    .textContent=streak+" wins";
-
-}
+/* ================= RECENT ================= */
 
 function renderRecent(){
 
-  const container=document.getElementById("recentTrades");
+  const container =
+    document.getElementById("recentTrades");
 
-  const recent=[...trades].reverse().slice(0,5);
+
+  const recent =
+    [...trades]
+      .reverse()
+      .slice(0,5);
+
 
   if(!recent.length){
 
-    container.innerHTML=`
+    container.innerHTML = `
+
       <tr>
-        <td colspan="4" class="empty">
+
+        <td
+          colspan="4"
+          class="empty"
+        >
           No recent trades.
         </td>
+
       </tr>`;
+
+    return;
+
+  }
+
+
+  container.innerHTML = "";
+
+
+  recent.forEach(t => {
+
+    container.innerHTML += `
+
+      <tr>
+
+        <td>
+          ${t.date || "-"}
+        </td>
+
+        <td>
+          <strong>
+            ${t.symbol}
+          </strong>
+        </td>
+
+        <td>
+          ${t.direction}
+        </td>
+
+        <td
+          class="${
+            Number(t.profit) >= 0
+            ? "green"
+            : "red"
+          }"
+        >
+          ${money(Number(t.profit))}
+        </td>
+
+      </tr>`;
+
+  });
+
+}
+
+
+/* ================= JOURNAL ================= */
+
+function saveJournal(){
+
+  if(!currentUser){
+
+    alert("Please sign in first.");
 
     return;
   }
 
-  container.innerHTML="";
 
-  recent.forEach(t=>{
+  const text =
+    document.getElementById(
+      "dailyJournal"
+    ).value;
 
-    container.innerHTML+=`
-      <tr>
-        <td>${t.date}</td>
-        <td><strong>${t.symbol}</strong></td>
-        <td>${t.direction}</td>
-        <td class="${t.profit>=0?"green":"red"}">
-          ${money(t.profit)}
-        </td>
-      </tr>`;
-  });
-}
 
-function saveJournal(){
+  localStorage.setItem(
+    "tj_journal_" + currentUser.id,
+    text
+  );
 
-  const text=document.getElementById("dailyJournal").value;
-
-  localStorage.setItem("tj_journal",text);
 
   alert("Reflection saved.");
+
 }
+
 
 function loadJournal(){
 
-  const text=localStorage.getItem("tj_journal")||"";
+  if(!currentUser){
 
-  document.getElementById("dailyJournal").value=text;
+    return;
+  }
+
+
+  const text =
+    localStorage.getItem(
+      "tj_journal_" + currentUser.id
+    ) || "";
+
+
+  document.getElementById(
+    "dailyJournal"
+  ).value =
+    text;
+
 }
+
+
+/* ================= UPDATE ================= */
 
 function updateAll(){
 
@@ -748,101 +1997,15 @@ function updateAll(){
   renderRecent();
 
   updateStats();
+
 }
 
-loadJournal();
 
-updateAll();
-
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-const SUPABASE_URL = "https://mwbubdeqytnyrdxfunuk.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_n02CS7Ch1X3MxJ503D6lzA_HPG6FYSl";
-
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-);
-
-console.log("TradeJournal: Supabase connected");
-</script>
-</script>
-async function signUp() {
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-
-  if (!email || !password) {
-    document.getElementById("authMessage").textContent =
-      "Enter your email and password.";
-    return;
-  }
-
-  const { error } = await supabaseClient.auth.signUp({
-    email: email,
-    password: password
-  });
-
-  if (error) {
-    document.getElementById("authMessage").textContent = error.message;
-    return;
-  }
-
-  document.getElementById("authMessage").textContent =
-    "Account created! Check your email to verify your account.";
-}
-
-async function signIn() {
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-
-  if (!email || !password) {
-    document.getElementById("authMessage").textContent =
-      "Enter your email and password.";
-    return;
-  }
-
-  const { error } = await supabaseClient.auth.signInWithPassword({
-    email: email,
-    password: password
-  });
-
-  if (error) {
-    document.getElementById("authMessage").textContent = error.message;
-    return;
-  }
-
-  document.getElementById("authMessage").textContent =
-    "Signed in successfully!";
-  document.getElementById("authScreen").style.display = "none";
-}
-</script>
-  <script>
-async function checkAuth() {
-  const { data: { session } } = await supabaseClient.auth.getSession();
-
-  const authScreen = document.getElementById("authScreen");
-
-  if (session) {
-    authScreen.style.display = "none";
-  } else {
-    authScreen.style.display = "flex";
-  }
-}
+/* ================= START ================= */
 
 checkAuth();
 
-supabaseClient.auth.onAuthStateChange((event, session) => {
-  const authScreen = document.getElementById("authScreen");
-
-  if (session) {
-    authScreen.style.display = "none";
-  } else {
-    authScreen.style.display = "flex";
-  }
-});
 </script>
+
 </body>
 </html>
