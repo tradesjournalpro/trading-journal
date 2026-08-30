@@ -1,0 +1,493 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeJournal</title>  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0b1120;
+      color: #ffffff;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #111827;
+      padding: 18px 20px;
+      border-bottom: 1px solid #263247;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #22c55e;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 25px 18px;
+    }
+
+    .welcome {
+      margin-bottom: 25px;
+    }
+
+    .welcome h1 {
+      font-size: 28px;
+      margin-bottom: 7px;
+    }
+
+    .welcome p {
+      color: #94a3b8;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: #111827;
+      border: 1px solid #263247;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .card-title {
+      color: #94a3b8;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .card-value {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .green {
+      color: #22c55e;
+    }
+
+    .red {
+      color: #ef4444;
+    }
+
+    .section {
+      background: #111827;
+      border: 1px solid #263247;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .section h2 {
+      margin-bottom: 18px;
+      font-size: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    label {
+      display: block;
+      color: #94a3b8;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      background: #0b1120;
+      color: white;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #22c55e;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    button {
+      background: #22c55e;
+      color: #052e16;
+      border: none;
+      padding: 13px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 14px 10px;
+      border-bottom: 1px solid #263247;
+    }
+
+    th {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    td {
+      font-size: 14px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #64748b;
+      padding: 30px;
+    }
+
+    .delete-btn {
+      background: #ef4444;
+      color: white;
+      padding: 7px 10px;
+      margin: 0;
+      font-size: 12px;
+    }
+
+    footer {
+      text-align: center;
+      color: #64748b;
+      padding: 25px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .card {
+        padding: 15px;
+      }
+
+      .card-value {
+        font-size: 20px;
+      }
+
+      .welcome h1 {
+        font-size: 23px;
+      }
+    }
+  </style></head><body><header>
+  <div class="logo">Trade<span>Journal</span></div>
+  <div>📊</div>
+</header><div class="container">  <div class="welcome">
+    <h1>Trading Dashboard</h1>
+    <p>Track your trades. Improve your strategy. Become consistent.</p>
+  </div>  <div class="stats"><div class="card">
+  <div class="card-title">TOTAL TRADES</div>
+  <div class="card-value" id="totalTrades">0</div>
+</div>
+
+<div class="card">
+  <div class="card-title">WIN RATE</div>
+  <div class="card-value green" id="winRate">0%</div>
+</div>
+
+<div class="card">
+  <div class="card-title">TOTAL P/L</div>
+  <div class="card-value" id="totalProfit">$0.00</div>
+</div>
+
+<div class="card">
+  <div class="card-title">WINS / LOSSES</div>
+  <div class="card-value" id="winLoss">0 / 0</div>
+</div>
+
+  </div>  <div class="section"><h2>➕ Add Trade</h2>
+
+<div class="form-grid">
+
+  <div>
+    <label>Date</label>
+    <input type="date" id="tradeDate">
+  </div>
+
+  <div>
+    <label>Symbol</label>
+    <input type="text" id="symbol" placeholder="e.g. XAUUSD">
+  </div>
+
+  <div>
+    <label>Direction</label>
+    <select id="direction">
+      <option value="Buy">Buy</option>
+      <option value="Sell">Sell</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Entry Price</label>
+    <input type="number" step="any" id="entry" placeholder="Entry">
+  </div>
+
+  <div>
+    <label>Exit Price</label>
+    <input type="number" step="any" id="exit" placeholder="Exit">
+  </div>
+
+  <div>
+    <label>Profit / Loss ($)</label>
+    <input type="number" step="any" id="profit" placeholder="Example: 50 or -25">
+  </div>
+
+  <div class="full">
+    <label>Trade Notes</label>
+    <textarea id="notes" placeholder="Why did you take this trade? What happened?"></textarea>
+  </div>
+
+  <div class="full">
+    <button onclick="addTrade()">Add Trade</button>
+  </div>
+
+</div>
+
+  </div>  <div class="section"><h2>📋 Trade History</h2>
+
+<div class="table-container">
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Symbol</th>
+        <th>Direction</th>
+        <th>Entry</th>
+        <th>Exit</th>
+        <th>P/L</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody id="tradeTable">
+      <tr>
+        <td colspan="7" class="empty">
+          No trades recorded yet.
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>
+
+  </div></div><footer>
+  TradeJournal © 2026 — Trade smarter. Journal better.
+</footer><script>
+
+  let trades = JSON.parse(localStorage.getItem("trades")) || [];
+
+  function saveTrades() {
+    localStorage.setItem("trades", JSON.stringify(trades));
+  }
+
+  function addTrade() {
+
+    const date = document.getElementById("tradeDate").value;
+    const symbol = document.getElementById("symbol").value.trim();
+    const direction = document.getElementById("direction").value;
+    const entry = document.getElementById("entry").value;
+    const exit = document.getElementById("exit").value;
+    const profit = parseFloat(document.getElementById("profit").value);
+    const notes = document.getElementById("notes").value;
+
+    if (!date || !symbol || isNaN(profit)) {
+      alert("Please enter the date, symbol and profit/loss.");
+      return;
+    }
+
+    const trade = {
+      id: Date.now(),
+      date: date,
+      symbol: symbol.toUpperCase(),
+      direction: direction,
+      entry: entry,
+      exit: exit,
+      profit: profit,
+      notes: notes
+    };
+
+    trades.push(trade);
+
+    saveTrades();
+
+    clearForm();
+
+    renderTrades();
+
+    updateStats();
+  }
+
+  function deleteTrade(id) {
+
+    trades = trades.filter(trade => trade.id !== id);
+
+    saveTrades();
+
+    renderTrades();
+
+    updateStats();
+  }
+
+  function clearForm() {
+
+    document.getElementById("symbol").value = "";
+    document.getElementById("entry").value = "";
+    document.getElementById("exit").value = "";
+    document.getElementById("profit").value = "";
+    document.getElementById("notes").value = "";
+  }
+
+  function renderTrades() {
+
+    const table = document.getElementById("tradeTable");
+
+    if (trades.length === 0) {
+
+      table.innerHTML = `
+        <tr>
+          <td colspan="7" class="empty">
+            No trades recorded yet.
+          </td>
+        </tr>
+      `;
+
+      return;
+    }
+
+    table.innerHTML = "";
+
+    [...trades].reverse().forEach(trade => {
+
+      const profitClass = trade.profit >= 0 ? "green" : "red";
+
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${trade.date}</td>
+        <td><strong>${trade.symbol}</strong></td>
+        <td>${trade.direction}</td>
+        <td>${trade.entry || "-"}</td>
+        <td>${trade.exit || "-"}</td>
+        <td class="${profitClass}">
+          ${trade.profit >= 0 ? "+" : ""}$${trade.profit.toFixed(2)}
+        </td>
+        <td>
+          <button class="delete-btn" onclick="deleteTrade(${trade.id})">
+            Delete
+          </button>
+        </td>
+      `;
+
+      table.appendChild(row);
+
+    });
+  }
+
+  function updateStats() {
+
+    const total = trades.length;
+
+    const wins = trades.filter(trade => trade.profit > 0).length;
+
+    const losses = trades.filter(trade => trade.profit < 0).length;
+
+    const totalProfit = trades.reduce(
+      (sum, trade) => sum + trade.profit,
+      0
+    );
+
+    const winRate = total > 0
+      ? ((wins / total) * 100).toFixed(1)
+      : 0;
+
+    document.getElementById("totalTrades").textContent = total;
+
+    document.getElementById("winRate").textContent =
+      winRate + "%";
+
+    document.getElementById("totalProfit").textContent =
+      (totalProfit >= 0 ? "+" : "") +
+      "$" +
+      totalProfit.toFixed(2);
+
+    document.getElementById("totalProfit").className =
+      "card-value " +
+      (totalProfit >= 0 ? "green" : "red");
+
+    document.getElementById("winLoss").textContent =
+      wins + " / " + losses;
+  }
+
+  renderTrades();
+
+  updateStats();
+
+</script></body>
+</html>
