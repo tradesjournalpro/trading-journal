@@ -1,315 +1,241 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TradeJournal</title>  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeJournal Pro</title><style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#080d18;color:#f8fafc;min-height:100vh}
+button,input,select,textarea{font:inherit}
 
-    body {
-      background: #0b1120;
-      color: #ffffff;
-      min-height: 100vh;
-    }
+header{
+  height:64px;background:#0f172a;border-bottom:1px solid #1e293b;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 22px;position:fixed;top:0;left:0;right:0;z-index:10
+}
+.logo{font-size:21px;font-weight:800}.logo span{color:#22c55e}
+.user{font-size:13px;color:#94a3b8}
 
-    header {
-      background: #111827;
-      padding: 18px 20px;
-      border-bottom: 1px solid #263247;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.sidebar{
+  position:fixed;top:64px;bottom:0;left:0;width:220px;
+  background:#0b1220;border-right:1px solid #1e293b;padding:20px 12px
+}
+.nav-btn{
+  width:100%;background:transparent;border:0;color:#94a3b8;
+  text-align:left;padding:13px 14px;border-radius:8px;
+  margin-bottom:5px;cursor:pointer
+}
+.nav-btn:hover,.nav-btn.active{background:#162033;color:#fff}
+.nav-btn.active{border-left:3px solid #22c55e}
 
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-    }
+main{margin-left:220px;padding:94px 25px 40px;max-width:1400px}
 
-    .logo span {
-      color: #22c55e;
-    }
+.page{display:none}.page.active{display:block}
+.title{font-size:28px;font-weight:800;margin-bottom:6px}
+.subtitle{color:#64748b;margin-bottom:25px}
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 25px 18px;
-    }
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:15px;margin-bottom:20px
+}
+.card{
+  background:#0f172a;border:1px solid #1e293b;
+  border-radius:12px;padding:19px
+}
+.label{font-size:12px;color:#64748b;margin-bottom:9px}
+.value{font-size:25px;font-weight:800}
+.green{color:#22c55e}.red{color:#ef4444}.muted{color:#94a3b8}
 
-    .welcome {
-      margin-bottom: 25px;
-    }
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.section{
+  background:#0f172a;border:1px solid #1e293b;
+  border-radius:12px;padding:20px;margin-bottom:20px
+}
+.section h2{font-size:18px;margin-bottom:18px}
 
-    .welcome h1 {
-      font-size: 28px;
-      margin-bottom: 7px;
-    }
+.form-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:15px
+}
+.full{grid-column:1/-1}
+label{display:block;color:#94a3b8;font-size:12px;margin-bottom:7px}
+input,select,textarea{
+  width:100%;background:#080d18;border:1px solid #334155;
+  color:#fff;border-radius:8px;padding:12px;outline:none
+}
+input:focus,select:focus,textarea:focus{border-color:#22c55e}
+textarea{min-height:100px;resize:vertical}
 
-    .welcome p {
-      color: #94a3b8;
-    }
+.btn{
+  background:#22c55e;color:#052e16;border:0;border-radius:8px;
+  padding:12px 18px;font-weight:800;cursor:pointer
+}
+.btn:hover{opacity:.9}
+.btn-danger{background:#ef4444;color:#fff;padding:7px 10px;font-size:12px}
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 25px;
-    }
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th,td{text-align:left;padding:13px 9px;border-bottom:1px solid #1e293b}
+th{font-size:11px;color:#64748b;text-transform:uppercase}
+td{font-size:13px}
 
-    .card {
-      background: #111827;
-      border: 1px solid #263247;
-      border-radius: 12px;
-      padding: 20px;
-    }
+.empty{text-align:center;color:#64748b;padding:30px}
 
-    .card-title {
-      color: #94a3b8;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
+.progress{
+  height:8px;background:#1e293b;border-radius:20px;overflow:hidden;margin-top:12px
+}
+.progress-bar{height:100%;background:#22c55e;width:0}
 
-    .card-value {
-      font-size: 25px;
-      font-weight: bold;
-    }
+.metric{
+  display:flex;justify-content:space-between;
+  padding:13px 0;border-bottom:1px solid #1e293b
+}
+.metric:last-child{border-bottom:0}
 
-    .green {
-      color: #22c55e;
-    }
+.stat-box{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:12px
+}
+.small-card{
+  background:#080d18;border:1px solid #1e293b;
+  border-radius:10px;padding:15px
+}
 
-    .red {
-      color: #ef4444;
-    }
+.tag{
+  display:inline-block;padding:4px 8px;border-radius:20px;
+  background:#162033;color:#94a3b8;font-size:11px
+}
 
-    .section {
-      background: #111827;
-      border: 1px solid #263247;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 25px;
-    }
+footer{text-align:center;color:#475569;font-size:12px;padding:25px}
 
-    .section h2 {
-      margin-bottom: 18px;
-      font-size: 20px;
-    }
+@media(max-width:900px){
+  .sidebar{width:70px}
+  .nav-btn{font-size:0;text-align:center;padding:15px 5px}
+  .nav-btn::first-letter{font-size:20px}
+  main{margin-left:70px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .grid2{grid-template-columns:1fr}
+}
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
+@media(max-width:600px){
+  header{padding:0 14px}
+  .stats{grid-template-columns:1fr 1fr;gap:9px}
+  main{padding:85px 12px 30px}
+  .card{padding:14px}
+  .value{font-size:19px}
+  .title{font-size:23px}
+  .form-grid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+}
+</style></head><body><header>
+  <div class="logo">Trade<span>Journal</span> Pro</div>
+  <div class="user">● Local Journal</div>
+</header><aside class="sidebar"><button class="nav-btn active" onclick="showPage('dashboard',this)">🏠 Dashboard</button>
 
-    label {
-      display: block;
-      color: #94a3b8;
-      font-size: 13px;
-      margin-bottom: 7px;
-    }
+<button class="nav-btn" onclick="showPage('trades',this)">📋 Trades</button>
 
-    input,
-    select,
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #334155;
-      background: #0b1120;
-      color: white;
-      outline: none;
-    }
+<button class="nav-btn" onclick="showPage('add',this)">➕ Add Trade</button>
 
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: #22c55e;
-    }
+<button class="nav-btn" onclick="showPage('analytics',this)">📊 Analytics</button>
 
-    textarea {
-      min-height: 90px;
-      resize: vertical;
-    }
+<button class="nav-btn" onclick="showPage('journal',this)">🧠 Journal</button>
 
-    .full {
-      grid-column: 1 / -1;
-    }
+<button class="nav-btn" onclick="showPage('settings',this)">⚙️ Settings</button>
 
-    button {
-      background: #22c55e;
-      color: #052e16;
-      border: none;
-      padding: 13px 20px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 5px;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
-    .table-container {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 700px;
-    }
-
-    th,
-    td {
-      text-align: left;
-      padding: 14px 10px;
-      border-bottom: 1px solid #263247;
-    }
-
-    th {
-      color: #94a3b8;
-      font-size: 13px;
-    }
-
-    td {
-      font-size: 14px;
-    }
-
-    .empty {
-      text-align: center;
-      color: #64748b;
-      padding: 30px;
-    }
-
-    .delete-btn {
-      background: #ef4444;
-      color: white;
-      padding: 7px 10px;
-      margin: 0;
-      font-size: 12px;
-    }
-
-    footer {
-      text-align: center;
-      color: #64748b;
-      padding: 25px;
-      font-size: 13px;
-    }
-
-    @media (max-width: 800px) {
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .full {
-        grid-column: auto;
-      }
-    }
-
-    @media (max-width: 500px) {
-      .stats {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-
-      .card {
-        padding: 15px;
-      }
-
-      .card-value {
-        font-size: 20px;
-      }
-
-      .welcome h1 {
-        font-size: 23px;
-      }
-    }
-  </style></head><body><header>
-  <div class="logo">Trade<span>Journal</span></div>
-  <div>📊</div>
-</header><div class="container">  <div class="welcome">
-    <h1>Trading Dashboard</h1>
-    <p>Track your trades. Improve your strategy. Become consistent.</p>
+</aside><main><!-- DASHBOARD --><section id="dashboard" class="page active">  <div class="title">Trading Dashboard</div>  <div class="subtitle">
+    Review your performance and trading consistency.
   </div>  <div class="stats"><div class="card">
-  <div class="card-title">TOTAL TRADES</div>
-  <div class="card-value" id="totalTrades">0</div>
+  <div class="label">TOTAL TRADES</div>
+  <div class="value" id="totalTrades">0</div>
 </div>
 
 <div class="card">
-  <div class="card-title">WIN RATE</div>
-  <div class="card-value green" id="winRate">0%</div>
+  <div class="label">WIN RATE</div>
+  <div class="value green" id="winRate">0%</div>
 </div>
 
 <div class="card">
-  <div class="card-title">TOTAL P/L</div>
-  <div class="card-value" id="totalProfit">$0.00</div>
+  <div class="label">NET P/L</div>
+  <div class="value" id="netProfit">$0.00</div>
 </div>
 
 <div class="card">
-  <div class="card-title">WINS / LOSSES</div>
-  <div class="card-value" id="winLoss">0 / 0</div>
+  <div class="label">PROFIT FACTOR</div>
+  <div class="value" id="profitFactor">0.00</div>
 </div>
 
-  </div>  <div class="section"><h2>➕ Add Trade</h2>
+  </div>  <div class="grid2"><div class="section">
 
-<div class="form-grid">
+  <h2>Performance</h2>
 
-  <div>
-    <label>Date</label>
-    <input type="date" id="tradeDate">
+  <div class="metric">
+    <span class="muted">Winning trades</span>
+    <strong class="green" id="wins">0</strong>
   </div>
 
-  <div>
-    <label>Symbol</label>
-    <input type="text" id="symbol" placeholder="e.g. XAUUSD">
+  <div class="metric">
+    <span class="muted">Losing trades</span>
+    <strong class="red" id="losses">0</strong>
   </div>
 
-  <div>
-    <label>Direction</label>
-    <select id="direction">
-      <option value="Buy">Buy</option>
-      <option value="Sell">Sell</option>
-    </select>
+  <div class="metric">
+    <span class="muted">Average win</span>
+    <strong id="avgWin">$0.00</strong>
   </div>
 
-  <div>
-    <label>Entry Price</label>
-    <input type="number" step="any" id="entry" placeholder="Entry">
-  </div>
-
-  <div>
-    <label>Exit Price</label>
-    <input type="number" step="any" id="exit" placeholder="Exit">
-  </div>
-
-  <div>
-    <label>Profit / Loss ($)</label>
-    <input type="number" step="any" id="profit" placeholder="Example: 50 or -25">
-  </div>
-
-  <div class="full">
-    <label>Trade Notes</label>
-    <textarea id="notes" placeholder="Why did you take this trade? What happened?"></textarea>
-  </div>
-
-  <div class="full">
-    <button onclick="addTrade()">Add Trade</button>
+  <div class="metric">
+    <span class="muted">Average loss</span>
+    <strong id="avgLoss">$0.00</strong>
   </div>
 
 </div>
 
-  </div>  <div class="section"><h2>📋 Trade History</h2>
+<div class="section">
 
-<div class="table-container">
+  <h2>Trading Consistency</h2>
+
+  <div class="metric">
+    <span class="muted">Largest win</span>
+    <strong class="green" id="largestWin">$0.00</strong>
+  </div>
+
+  <div class="metric">
+    <span class="muted">Largest loss</span>
+    <strong class="red" id="largestLoss">$0.00</strong>
+  </div>
+
+  <div class="metric">
+    <span class="muted">Current streak</span>
+    <strong id="streak">0</strong>
+  </div>
+
+  <div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+</div>
+
+  </div>  <div class="section"><h2>Recent Trades</h2>
+
+<div class="table-wrap">
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Symbol</th>
+        <th>Direction</th>
+        <th>P/L</th>
+      </tr>
+    </thead>
+
+    <tbody id="recentTrades"></tbody>
+
+  </table>
+
+</div>
+
+  </div></section><!-- TRADES --><section id="trades" class="page">  <div class="title">Trade History</div>  <div class="subtitle">
+    All recorded trades.
+  </div>  <div class="section"><div class="table-wrap">
 
   <table>
 
@@ -325,169 +251,485 @@
       </tr>
     </thead>
 
-    <tbody id="tradeTable">
-      <tr>
-        <td colspan="7" class="empty">
-          No trades recorded yet.
-        </td>
-      </tr>
-    </tbody>
+    <tbody id="tradeTable"></tbody>
 
   </table>
 
 </div>
 
-  </div></div><footer>
-  TradeJournal © 2026 — Trade smarter. Journal better.
-</footer><script>
+  </div></section><!-- ADD TRADE --><section id="add" class="page">  <div class="title">Add Trade</div>  <div class="subtitle">
+    Record a trade manually for testing.
+  </div>  <div class="section"><div class="form-grid">
 
-  let trades = JSON.parse(localStorage.getItem("trades")) || [];
+  <div>
+    <label>Date</label>
+    <input type="date" id="tradeDate">
+  </div>
 
-  function saveTrades() {
-    localStorage.setItem("trades", JSON.stringify(trades));
+  <div>
+    <label>Symbol</label>
+    <input id="symbol" placeholder="XAUUSD">
+  </div>
+
+  <div>
+    <label>Direction</label>
+    <select id="direction">
+      <option>Buy</option>
+      <option>Sell</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Entry Price</label>
+    <input type="number" step="any" id="entry">
+  </div>
+
+  <div>
+    <label>Exit Price</label>
+    <input type="number" step="any" id="exit">
+  </div>
+
+  <div>
+    <label>Profit / Loss ($)</label>
+    <input type="number" step="any" id="profit">
+  </div>
+
+  <div>
+    <label>Strategy</label>
+    <select id="strategy">
+      <option>Scalping</option>
+      <option>Breakout</option>
+      <option>Trend Following</option>
+      <option>Liquidity Sweep</option>
+      <option>Other</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Emotion</label>
+    <select id="emotion">
+      <option>Confident</option>
+      <option>Calm</option>
+      <option>Fearful</option>
+      <option>Greedy</option>
+      <option>FOMO</option>
+      <option>Revenge</option>
+    </select>
+  </div>
+
+  <div class="full">
+    <label>Trade Notes</label>
+    <textarea id="notes"
+      placeholder="Why did you take the trade? What went well? What went wrong?"></textarea>
+  </div>
+
+  <div class="full">
+    <button class="btn" onclick="addTrade()">Save Trade</button>
+  </div>
+
+</div>
+
+  </div></section><!-- ANALYTICS --><section id="analytics" class="page">  <div class="title">Analytics</div>  <div class="subtitle">
+    Analyze your trading performance.
+  </div>  <div class="grid2"><div class="section">
+
+  <h2>Trade Statistics</h2>
+
+  <div class="metric">
+    <span class="muted">Total trades</span>
+    <strong id="aTotal">0</strong>
+  </div>
+
+  <div class="metric">
+    <span class="muted">Win rate</span>
+    <strong id="aWinRate">0%</strong>
+  </div>
+
+  <div class="metric">
+    <span class="muted">Profit factor</span>
+    <strong id="aPF">0.00</strong>
+  </div>
+
+  <div class="metric">
+    <span class="muted">Net profit</span>
+    <strong id="aNet">$0.00</strong>
+  </div>
+
+</div>
+
+<div class="section">
+
+  <h2>Outcomes</h2>
+
+  <div class="stat-box">
+
+    <div class="small-card">
+      <div class="label">WINS</div>
+      <div class="value green" id="aWins">0</div>
+    </div>
+
+    <div class="small-card">
+      <div class="label">LOSSES</div>
+      <div class="value red" id="aLosses">0</div>
+    </div>
+
+  </div>
+
+</div>
+
+  </div></section><!-- JOURNAL --><section id="journal" class="page">  <div class="title">Trading Journal</div>  <div class="subtitle">
+    Keep track of your mindset and lessons.
+  </div>  <div class="section"><label>Daily Reflection</label>
+
+<textarea id="dailyJournal"
+  placeholder="How did you trade today? What did you learn?"></textarea>
+
+<br>
+
+<button class="btn" onclick="saveJournal()">Save Reflection</button>
+
+  </div>  <div class="section"><h2>Trading Rules</h2>
+
+<div class="metric">
+  <span>Risk management</span>
+  <span class="tag">Protect capital</span>
+</div>
+
+<div class="metric">
+  <span>Patience</span>
+  <span class="tag">Wait for setup</span>
+</div>
+
+<div class="metric">
+  <span>Discipline</span>
+  <span class="tag">Follow the plan</span>
+</div>
+
+  </div></section><!-- SETTINGS --><section id="settings" class="page">  <div class="title">Settings</div>  <div class="subtitle">
+    Journal preferences.
+  </div>  <div class="section"><h2>Account</h2>
+
+<div class="metric">
+  <span class="muted">Connection</span>
+  <strong class="green">Local</strong>
+</div>
+
+<div class="metric">
+  <span class="muted">MT5 Integration</span>
+  <strong class="muted">Coming later</strong>
+</div>
+
+  </div>  <div class="section"><h2>Data</h2>
+
+<button class="btn btn-danger" onclick="clearAllTrades()">
+  Delete All Trades
+</button>
+
+  </div></section><footer>
+TradeJournal Pro © 2026
+</footer></main><script>
+
+let trades = JSON.parse(localStorage.getItem("tj_trades")) || [];
+
+function money(value){
+  return (value >= 0 ? "+" : "") + "$" + value.toFixed(2);
+}
+
+function showPage(page,button){
+
+  document.querySelectorAll(".page")
+    .forEach(p => p.classList.remove("active"));
+
+  document.getElementById(page)
+    .classList.add("active");
+
+  document.querySelectorAll(".nav-btn")
+    .forEach(b => b.classList.remove("active"));
+
+  button.classList.add("active");
+
+  updateAll();
+}
+
+function addTrade(){
+
+  const date = document.getElementById("tradeDate").value;
+  const symbol = document.getElementById("symbol").value.trim();
+  const direction = document.getElementById("direction").value;
+  const entry = document.getElementById("entry").value;
+  const exit = document.getElementById("exit").value;
+  const profit = parseFloat(document.getElementById("profit").value);
+  const strategy = document.getElementById("strategy").value;
+  const emotion = document.getElementById("emotion").value;
+  const notes = document.getElementById("notes").value;
+
+  if(!date || !symbol || isNaN(profit)){
+    alert("Please enter the date, symbol and profit/loss.");
+    return;
   }
 
-  function addTrade() {
+  trades.push({
+    id:Date.now(),
+    date,
+    symbol:symbol.toUpperCase(),
+    direction,
+    entry,
+    exit,
+    profit,
+    strategy,
+    emotion,
+    notes
+  });
 
-    const date = document.getElementById("tradeDate").value;
-    const symbol = document.getElementById("symbol").value.trim();
-    const direction = document.getElementById("direction").value;
-    const entry = document.getElementById("entry").value;
-    const exit = document.getElementById("exit").value;
-    const profit = parseFloat(document.getElementById("profit").value);
-    const notes = document.getElementById("notes").value;
+  localStorage.setItem("tj_trades",JSON.stringify(trades));
 
-    if (!date || !symbol || isNaN(profit)) {
-      alert("Please enter the date, symbol and profit/loss.");
-      return;
-    }
+  document.getElementById("symbol").value="";
+  document.getElementById("entry").value="";
+  document.getElementById("exit").value="";
+  document.getElementById("profit").value="";
+  document.getElementById("notes").value="";
 
-    const trade = {
-      id: Date.now(),
-      date: date,
-      symbol: symbol.toUpperCase(),
-      direction: direction,
-      entry: entry,
-      exit: exit,
-      profit: profit,
-      notes: notes
-    };
+  alert("Trade saved successfully.");
 
-    trades.push(trade);
+  updateAll();
+}
 
-    saveTrades();
+function deleteTrade(id){
 
-    clearForm();
+  trades=trades.filter(t=>t.id!==id);
 
-    renderTrades();
+  localStorage.setItem("tj_trades",JSON.stringify(trades));
 
-    updateStats();
+  updateAll();
+}
+
+function clearAllTrades(){
+
+  if(confirm("Delete ALL trades? This cannot be undone.")){
+
+    trades=[];
+
+    localStorage.removeItem("tj_trades");
+
+    updateAll();
   }
+}
 
-  function deleteTrade(id) {
+function renderTrades(){
 
-    trades = trades.filter(trade => trade.id !== id);
+  const table=document.getElementById("tradeTable");
 
-    saveTrades();
+  if(trades.length===0){
 
-    renderTrades();
-
-    updateStats();
-  }
-
-  function clearForm() {
-
-    document.getElementById("symbol").value = "";
-    document.getElementById("entry").value = "";
-    document.getElementById("exit").value = "";
-    document.getElementById("profit").value = "";
-    document.getElementById("notes").value = "";
-  }
-
-  function renderTrades() {
-
-    const table = document.getElementById("tradeTable");
-
-    if (trades.length === 0) {
-
-      table.innerHTML = `
-        <tr>
-          <td colspan="7" class="empty">
-            No trades recorded yet.
-          </td>
-        </tr>
-      `;
-
-      return;
-    }
-
-    table.innerHTML = "";
-
-    [...trades].reverse().forEach(trade => {
-
-      const profitClass = trade.profit >= 0 ? "green" : "red";
-
-      const row = document.createElement("tr");
-
-      row.innerHTML = `
-        <td>${trade.date}</td>
-        <td><strong>${trade.symbol}</strong></td>
-        <td>${trade.direction}</td>
-        <td>${trade.entry || "-"}</td>
-        <td>${trade.exit || "-"}</td>
-        <td class="${profitClass}">
-          ${trade.profit >= 0 ? "+" : ""}$${trade.profit.toFixed(2)}
+    table.innerHTML=`
+      <tr>
+        <td colspan="7" class="empty">
+          No trades recorded yet.
         </td>
+      </tr>`;
+
+    return;
+  }
+
+  table.innerHTML="";
+
+  [...trades].reverse().forEach(t=>{
+
+    const cls=t.profit>=0?"green":"red";
+
+    table.innerHTML+=`
+      <tr>
+        <td>${t.date}</td>
+        <td><strong>${t.symbol}</strong></td>
+        <td>${t.direction}</td>
+        <td>${t.entry||"-"}</td>
+        <td>${t.exit||"-"}</td>
+        <td class="${cls}">${money(t.profit)}</td>
         <td>
-          <button class="delete-btn" onclick="deleteTrade(${trade.id})">
-            Delete
-          </button>
+          <button class="btn btn-danger"
+          onclick="deleteTrade(${t.id})">Delete</button>
         </td>
-      `;
+      </tr>`;
+  });
+}
 
-      table.appendChild(row);
+function updateStats(){
 
-    });
+  const total=trades.length;
+
+  const wins=trades.filter(t=>t.profit>0);
+
+  const losses=trades.filter(t=>t.profit<0);
+
+  const net=trades.reduce((s,t)=>s+t.profit,0);
+
+  const grossWin=wins.reduce((s,t)=>s+t.profit,0);
+
+  const grossLoss=Math.abs(
+    losses.reduce((s,t)=>s+t.profit,0)
+  );
+
+  const winRate=total
+    ? ((wins.length/total)*100)
+    : 0;
+
+  const pf=grossLoss
+    ? grossWin/grossLoss
+    : 0;
+
+  const avgWin=wins.length
+    ? grossWin/wins.length
+    : 0;
+
+  const avgLoss=losses.length
+    ? grossLoss/losses.length
+    : 0;
+
+  const largestWin=wins.length
+    ? Math.max(...wins.map(t=>t.profit))
+    : 0;
+
+  const largestLoss=losses.length
+    ? Math.min(...losses.map(t=>t.profit))
+    : 0;
+
+  document.getElementById("totalTrades").textContent=total;
+
+  document.getElementById("winRate").textContent=
+    winRate.toFixed(1)+"%";
+
+  const netElement=document.getElementById("netProfit");
+
+  netElement.textContent=money(net);
+
+  netElement.className="value "+(net>=0?"green":"red");
+
+  document.getElementById("profitFactor")
+    .textContent=pf.toFixed(2);
+
+  document.getElementById("wins")
+    .textContent=wins.length;
+
+  document.getElementById("losses")
+    .textContent=losses.length;
+
+  document.getElementById("avgWin")
+    .textContent="$"+avgWin.toFixed(2);
+
+  document.getElementById("avgLoss")
+    .textContent="-$"+avgLoss.toFixed(2);
+
+  document.getElementById("largestWin")
+    .textContent="$"+largestWin.toFixed(2);
+
+  document.getElementById("largestLoss")
+    .textContent="$"+largestLoss.toFixed(2);
+
+  document.getElementById("aTotal")
+    .textContent=total;
+
+  document.getElementById("aWinRate")
+    .textContent=winRate.toFixed(1)+"%";
+
+  document.getElementById("aPF")
+    .textContent=pf.toFixed(2);
+
+  document.getElementById("aNet")
+    .textContent=money(net);
+
+  document.getElementById("aWins")
+    .textContent=wins.length;
+
+  document.getElementById("aLosses")
+    .textContent=losses.length;
+
+  document.getElementById("progressBar")
+    .style.width=Math.min(winRate,100)+"%";
+
+  calculateStreak();
+
+}
+
+function calculateStreak(){
+
+  let streak=0;
+
+  for(let i=trades.length-1;i>=0;i--){
+
+    if(trades[i].profit>0)
+      streak++;
+
+    else
+      break;
   }
 
-  function updateStats() {
+  document.getElementById("streak")
+    .textContent=streak+" wins";
 
-    const total = trades.length;
+}
 
-    const wins = trades.filter(trade => trade.profit > 0).length;
+function renderRecent(){
 
-    const losses = trades.filter(trade => trade.profit < 0).length;
+  const container=document.getElementById("recentTrades");
 
-    const totalProfit = trades.reduce(
-      (sum, trade) => sum + trade.profit,
-      0
-    );
+  const recent=[...trades].reverse().slice(0,5);
 
-    const winRate = total > 0
-      ? ((wins / total) * 100).toFixed(1)
-      : 0;
+  if(!recent.length){
 
-    document.getElementById("totalTrades").textContent = total;
+    container.innerHTML=`
+      <tr>
+        <td colspan="4" class="empty">
+          No recent trades.
+        </td>
+      </tr>`;
 
-    document.getElementById("winRate").textContent =
-      winRate + "%";
-
-    document.getElementById("totalProfit").textContent =
-      (totalProfit >= 0 ? "+" : "") +
-      "$" +
-      totalProfit.toFixed(2);
-
-    document.getElementById("totalProfit").className =
-      "card-value " +
-      (totalProfit >= 0 ? "green" : "red");
-
-    document.getElementById("winLoss").textContent =
-      wins + " / " + losses;
+    return;
   }
+
+  container.innerHTML="";
+
+  recent.forEach(t=>{
+
+    container.innerHTML+=`
+      <tr>
+        <td>${t.date}</td>
+        <td><strong>${t.symbol}</strong></td>
+        <td>${t.direction}</td>
+        <td class="${t.profit>=0?"green":"red"}">
+          ${money(t.profit)}
+        </td>
+      </tr>`;
+  });
+}
+
+function saveJournal(){
+
+  const text=document.getElementById("dailyJournal").value;
+
+  localStorage.setItem("tj_journal",text);
+
+  alert("Reflection saved.");
+}
+
+function loadJournal(){
+
+  const text=localStorage.getItem("tj_journal")||"";
+
+  document.getElementById("dailyJournal").value=text;
+}
+
+function updateAll(){
 
   renderTrades();
 
+  renderRecent();
+
   updateStats();
+}
+
+loadJournal();
+
+updateAll();
 
 </script></body>
 </html>
