@@ -577,6 +577,21 @@ footer{
     display:none;
 }
 
+/* ================= SETTINGS MOBILE ================= */
+
+.settings-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.settings-card{
+    background:#080d18;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:15px;
+}
+
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:1000px){
@@ -618,7 +633,7 @@ footer{
 @media(max-width:650px){
 
     body{
-        padding-bottom:70px;
+        padding-bottom:76px;
     }
 
     header{
@@ -759,14 +774,15 @@ footer{
         height:140px;
     }
 
+    /* 6 mobile navigation items */
     .mobile-bottom-nav{
         position:fixed;
         display:grid;
-        grid-template-columns:repeat(5,1fr);
+        grid-template-columns:repeat(6,1fr);
         bottom:0;
         left:0;
         right:0;
-        height:64px;
+        height:70px;
         background:#0b1220;
         border-top:1px solid var(--border);
         z-index:200;
@@ -777,16 +793,17 @@ footer{
         border:0;
         background:transparent;
         color:var(--dim);
-        font-size:10px;
+        font-size:8px;
         display:flex;
         flex-direction:column;
         align-items:center;
         justify-content:center;
         gap:3px;
+        min-width:0;
     }
 
     .mobile-nav-btn .icon{
-        font-size:19px;
+        font-size:18px;
     }
 
     .mobile-nav-btn.active{
@@ -804,8 +821,28 @@ footer{
     .toast{
         right:10px;
         left:10px;
-        bottom:75px;
+        bottom:80px;
         text-align:center;
+    }
+
+    .settings-grid{
+        grid-template-columns:1fr;
+        gap:10px;
+    }
+
+    #settings .metric{
+        padding:11px 0;
+    }
+
+    #settings .metric strong{
+        text-align:right;
+        max-width:55%;
+        overflow-wrap:anywhere;
+    }
+
+    #settings .btn-danger{
+        width:100%;
+        padding:11px;
     }
 }
 </style>
@@ -1087,7 +1124,7 @@ Search, filter and manage your trades.
 <input
 id="tradeSearch"
 placeholder="Search symbol..."
-oninput="renderTrades()">
+oninput="renderTrades">
 
 <select id="tradeResultFilter" onchange="renderTrades()">
 
@@ -1597,7 +1634,7 @@ Save Reflection
 <div class="title">Settings</div>
 
 <div class="subtitle">
-Your TradeJournal Pro account.
+Manage your TradeJournal Pro account and preferences.
 </div>
 
 <div class="section">
@@ -1636,9 +1673,9 @@ Your trades are connected to your Supabase account.
 
 <h2>Trading Preferences</h2>
 
-<div class="form-grid">
+<div class="settings-grid">
 
-<div>
+<div class="settings-card">
 
 <label>Default Currency</label>
 
@@ -1666,7 +1703,7 @@ GBP (£)
 
 </div>
 
-<div>
+<div class="settings-card">
 
 <label>Default Risk %</label>
 
@@ -1688,6 +1725,10 @@ placeholder="1">
 
 <h2>Data</h2>
 
+<p class="muted" style="margin-bottom:15px;font-size:13px;">
+Delete all trades permanently from your account.
+</p>
+
 <button
 class="btn-danger"
 onclick="clearAllTrades()">
@@ -1706,7 +1747,7 @@ TradeJournal Pro © 2026
 </main>
 
 
-<!-- MOBILE BOTTOM NAV -->
+<!-- ================= MOBILE BOTTOM NAV ================= -->
 
 <nav class="mobile-bottom-nav">
 
@@ -1743,6 +1784,13 @@ class="mobile-nav-btn"
 onclick="mobilePage('analytics',this)">
 <span class="icon">📊</span>
 Stats
+</button>
+
+<button
+class="mobile-nav-btn"
+onclick="mobilePage('settings',this)">
+<span class="icon">⚙️</span>
+Settings
 </button>
 
 </nav>
@@ -1803,6 +1851,56 @@ toast.style.display="none";
 }
 
 
+/*
+====================================================
+DATE SAFETY
+====================================================
+
+The database stores open_time as:
+
+YYYY-MM-DDT12:00:00.000Z
+
+We NEVER convert the selected date using
+new Date(date).toISOString().
+
+We also NEVER use toLocaleDateString() for
+database trade dates.
+
+This prevents a selected date such as:
+
+2026-09-01
+
+from becoming:
+
+2026-08-31
+
+in another timezone.
+*/
+
+function createSafeTimestamp(dateString){
+
+return `${dateString}T12:00:00.000Z`;
+
+}
+
+
+function extractTradeDate(openTime){
+
+if(!openTime)return "";
+
+const value=String(openTime);
+
+const match=value.match(
+/^(\d{4}-\d{2}-\d{2})/
+);
+
+return match
+?match[1]
+:"";
+
+}
+
+
 /* ================= AUTH ================= */
 
 async function signUp(){
@@ -1846,7 +1944,8 @@ email,
 password,
 
 options:{
-emailRedirectTo:"https://tradesjournalpro.github.io/trading-journal/"
+emailRedirectTo:
+"https://tradesjournalpro.github.io/trading-journal/"
 }
 
 });
@@ -2060,12 +2159,7 @@ document.getElementById(
 
 /* ================= DATE ================= */
 
-function setDefaultDate(){
-
-const input=
-document.getElementById("tradeDate");
-
-if(input&&!input.value){
+function getLocalDateString(){
 
 const d=new Date();
 
@@ -2079,10 +2173,94 @@ const day=
 String(d.getDate())
 .padStart(2,"0");
 
-input.value=
-`${year}-${month}-${day}`;
+return `${year}-${month}-${day}`;
 
 }
+
+
+function setDefaultDate(){
+
+const input=
+document.getElementById("tradeDate");
+
+if(input&&!input.value){
+
+input.value=getLocalDateString();
+
+}
+
+}
+
+
+/* ================= SETUP QUALITY LOCAL STORAGE ================= */
+
+/*
+Supabase currently does not have a setup_quality column.
+
+Therefore setup quality is stored locally for this browser/account
+instead of being sent to Supabase.
+
+This prevents:
+
+"Could not find the 'setup_quality' column of 'trades'
+in the schema cache"
+
+from blocking trade saves.
+*/
+
+function setupQualityStorageKey(){
+
+return currentUser
+?"tj_setup_quality_"+currentUser.id
+:null;
+
+}
+
+
+function loadSetupQualityMap(){
+
+if(!currentUser)return {};
+
+try{
+
+return JSON.parse(
+localStorage.getItem(
+setupQualityStorageKey()
+)||"{}"
+);
+
+}catch(e){
+
+return {};
+
+}
+
+}
+
+
+function saveSetupQualityLocally(tradeId,quality){
+
+if(!currentUser||!tradeId)return;
+
+const map=loadSetupQualityMap();
+
+map[String(tradeId)]=quality||"";
+
+localStorage.setItem(
+setupQualityStorageKey(),
+JSON.stringify(map)
+);
+
+}
+
+
+function getSetupQualityLocally(tradeId){
+
+if(!tradeId)return "";
+
+const map=loadSetupQualityMap();
+
+return map[String(tradeId)]||"";
 
 }
 
@@ -2128,18 +2306,7 @@ trades=(data||[]).map(t=>({
 
 id:t.id,
 
-/*
-Use the first 10 characters from the
-database timestamp.
-
-The save function below stores the selected
-date at 12:00 UTC, preventing timezone
-conversion from moving the date backward.
-*/
-
-date:t.open_time
-?t.open_time.substring(0,10)
-:"",
+date:extractTradeDate(t.open_time),
 
 symbol:t.symbol||"",
 
@@ -2163,7 +2330,9 @@ emotion:t.emotion||"",
 
 notes:t.notes||"",
 
-setupQuality:t.setup_quality||"",
+setupQuality:
+t.setup_quality||
+getSetupQualityLocally(t.id)||"",
 
 open_time:t.open_time,
 
@@ -2241,26 +2410,24 @@ return;
 
 /*
 ====================================================
-DATE FIX
+TIMEZONE-SAFE DATE
 ====================================================
 
-DO NOT use:
+The selected date is stored exactly as entered.
 
-new Date(date+"T00:00:00").toISOString()
+Example:
 
-That converts local midnight to UTC and can turn:
+2026-09-01
 
-September 1 -> August 31
+becomes:
 
-Instead, we store the selected calendar date
-at 12:00 UTC.
+2026-09-01T12:00:00.000Z
 
-This keeps the YYYY-MM-DD portion unchanged
-when Supabase returns the timestamp.
+No local-midnight conversion is performed.
 */
 
-const openTime =
-`${date}T12:00:00.000Z`;
+const openTime=
+createSafeTimestamp(date);
 
 
 const tradeData={
@@ -2297,9 +2464,16 @@ strategy:strategy,
 
 emotion:emotion,
 
-notes:notes,
+notes:notes
 
-setup_quality:setupQuality
+/*
+IMPORTANT:
+
+setup_quality is intentionally NOT included.
+
+Your current Supabase trades table does not expose
+that column in its schema cache.
+*/
 
 };
 
@@ -2338,6 +2512,21 @@ data
 );
 
 
+/*
+Save setup quality locally after the trade
+has successfully been created.
+*/
+
+if(data&&data.id){
+
+saveSetupQualityLocally(
+data.id,
+setupQuality
+);
+
+}
+
+
 /* Clear form */
 
 [
@@ -2362,11 +2551,33 @@ field.value="";
 
 
 /*
-Keep today's date in the date field
-instead of clearing it.
+Reset select fields.
 */
 
-setDefaultDate();
+document.getElementById(
+"direction"
+).value="Buy";
+
+document.getElementById(
+"strategy"
+).value="Scalping";
+
+document.getElementById(
+"emotion"
+).value="Confident";
+
+document.getElementById(
+"setupQuality"
+).value="Excellent";
+
+
+/*
+Keep today's local date.
+*/
+
+document.getElementById(
+"tradeDate"
+).value=getLocalDateString();
 
 
 showToast(
@@ -2408,6 +2619,19 @@ return;
 
 }
 
+
+/* Remove locally saved setup quality */
+
+const map=loadSetupQualityMap();
+
+delete map[String(id)];
+
+localStorage.setItem(
+setupQualityStorageKey(),
+JSON.stringify(map)
+);
+
+
 await loadTrades();
 
 updateAll();
@@ -2447,6 +2671,13 @@ return;
 }
 
 trades=[];
+
+
+/* Clear locally stored setup quality */
+
+localStorage.removeItem(
+setupQualityStorageKey()
+);
 
 updateAll();
 
