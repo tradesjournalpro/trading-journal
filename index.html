@@ -1087,7 +1087,7 @@ Search, filter and manage your trades.
 <input
 id="tradeSearch"
 placeholder="Search symbol..."
-oninput="renderTrades">
+oninput="renderTrades()">
 
 <select id="tradeResultFilter" onchange="renderTrades()">
 
@@ -2128,6 +2128,15 @@ trades=(data||[]).map(t=>({
 
 id:t.id,
 
+/*
+Use the first 10 characters from the
+database timestamp.
+
+The save function below stores the selected
+date at 12:00 UTC, preventing timezone
+conversion from moving the date backward.
+*/
+
 date:t.open_time
 ?t.open_time.substring(0,10)
 :"",
@@ -2230,10 +2239,28 @@ return;
 }
 
 
-const openTime=
-new Date(
-date+"T00:00:00"
-).toISOString();
+/*
+====================================================
+DATE FIX
+====================================================
+
+DO NOT use:
+
+new Date(date+"T00:00:00").toISOString()
+
+That converts local midnight to UTC and can turn:
+
+September 1 -> August 31
+
+Instead, we store the selected calendar date
+at 12:00 UTC.
+
+This keeps the YYYY-MM-DD portion unchanged
+when Supabase returns the timestamp.
+*/
+
+const openTime =
+`${date}T12:00:00.000Z`;
 
 
 const tradeData={
@@ -2270,7 +2297,9 @@ strategy:strategy,
 
 emotion:emotion,
 
-notes:notes
+notes:notes,
+
+setup_quality:setupQuality
 
 };
 
@@ -2309,6 +2338,8 @@ data
 );
 
 
+/* Clear form */
+
 [
 "symbol",
 "entry",
@@ -2320,9 +2351,22 @@ data
 "notes"
 ].forEach(id=>{
 
-document.getElementById(id).value="";
+const field=
+document.getElementById(id);
+
+if(field){
+field.value="";
+}
 
 });
+
+
+/*
+Keep today's date in the date field
+instead of clearing it.
+*/
+
+setDefaultDate();
 
 
 showToast(
@@ -2444,7 +2488,7 @@ behavior:"smooth"
 }
 
 
-/* MOBILE NAV */
+/* ================= MOBILE NAV ================= */
 
 function mobilePage(page,button){
 
