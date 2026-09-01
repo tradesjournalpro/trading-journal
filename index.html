@@ -1087,7 +1087,7 @@ Search, filter and manage your trades.
 <input
 id="tradeSearch"
 placeholder="Search symbol..."
-oninput="renderTrades()">
+oninput="renderTrades">
 
 <select id="tradeResultFilter" onchange="renderTrades()">
 
@@ -1846,7 +1846,7 @@ email,
 password,
 
 options:{
-emailRedirectTo:https://tradesjournalpro.github.io/trading-journal/
+emailRedirectTo:"https://tradesjournalpro.github.io/trading-journal/"
 }
 
 });
@@ -2230,12 +2230,6 @@ return;
 }
 
 
-/*
-IMPORTANT:
-We DO NOT provide the "id" field.
-Supabase/Postgres must generate it automatically.
-*/
-
 const openTime=
 new Date(
 date+"T00:00:00"
@@ -2281,13 +2275,6 @@ notes:notes
 };
 
 
-/*
-NOTE:
-setupQuality is intentionally not inserted.
-If your database doesn't have setup_quality,
-this keeps the insert from failing.
-*/
-
 const {
 data,
 error
@@ -2321,8 +2308,6 @@ console.log(
 data
 );
 
-
-/* CLEAR FORM */
 
 [
 "symbol",
