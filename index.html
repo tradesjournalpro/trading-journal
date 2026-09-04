@@ -1002,167 +1002,208 @@ footer{
   grid-template-columns:1fr 1fr;
  }
 }
- /* ================= MOBILE HAMBURGER DRAWER ================= */
+/* ================= MOBILE HAMBURGER DRAWER ================= */
 
 .mobile-menu-toggle{
-display:none;
+  display:none;
 }
 
 .mobile-menu-overlay{
-display:none;
+  display:none;
 }
 
 .mobile-side-drawer{
-display:none;
+  display:none;
 }
+
 
 /* ================= MOBILE ================= */
 
 @media(max-width:600px){
 
-/* Hide old mobile bottom navigation */
-.mobile-bottom-nav{
-display:none !important;
-}
+  /* Hide old bottom navigation */
+  .mobile-bottom-nav{
+    display:none !important;
+  }
 
-/* Hamburger button */
-.mobile-menu-toggle{
-display:flex;
-position:fixed;
-top:15px;
-left:15px;
-width:44px;
-height:44px;
-align-items:center;
-justify-content:center;
-z-index:10001;
 
-border:none;
-border-radius:12px;
-background:#111827;
-color:white;
-font-size:25px;
-cursor:pointer;
-box-shadow:0 4px 15px rgba(0,0,0,.25);
+  /* ================= TOP BAR ================= */
 
-}
+  .mobile-menu-toggle{
+    display:flex;
+    position:fixed;
+    top:15px;
+    left:15px;
 
-/* Dark background behind drawer */
-.mobile-menu-overlay{
-position:fixed;
-inset:0;
-z-index:10000;
-background:rgba(0,0,0,.55);
-opacity:0;
-pointer-events:none;
-display:block;
-transition:opacity .25s ease;
-}
+    width:42px;
+    height:42px;
 
-/* Drawer */
-.mobile-side-drawer{
-display:flex;
-flex-direction:column;
+    align-items:center;
+    justify-content:center;
 
-position:fixed;
-top:0;
-left:0;
-width:280px;
-max-width:85vw;
-height:100vh;
+    z-index:10001;
 
-z-index:10002;
-padding:20px 14px;
+    border:none;
+    border-radius:10px;
 
-background:#111827;
-box-shadow:8px 0 25px rgba(0,0,0,.3);
+    background:#111827;
+    color:white;
 
-transform:translateX(-105%);
-transition:transform .28s ease;
+    font-size:23px;
+    cursor:pointer;
 
-overflow-y:auto;
+    box-shadow:0 4px 12px rgba(0,0,0,.25);
+  }
 
-}
 
-/* Drawer open state */
-.mobile-side-drawer.open{
-transform:translateX(0);
-}
+  /* ================= DARK OVERLAY ================= */
 
-.mobile-menu-overlay.open{
-opacity:1;
-pointer-events:auto;
-}
+  .mobile-menu-overlay{
+    position:fixed;
+    inset:0;
 
-/* Drawer header */
-.mobile-drawer-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
+    z-index:10000;
 
-padding:8px 8px 20px;
-margin-bottom:8px;
+    background:rgba(0,0,0,.45);
 
-color:white;
-font-size:18px;
+    opacity:0;
+    pointer-events:none;
 
-}
+    display:block;
 
-/* Close button */
-.mobile-menu-close{
-width:40px;
-height:40px;
+    transition:opacity .25s ease;
+  }
 
-border:none;
-border-radius:10px;
+  .mobile-menu-overlay.open{
+    opacity:1;
+    pointer-events:auto;
+  }
 
-background:rgba(255,255,255,.08);
-color:white;
 
-font-size:28px;
-line-height:1;
-cursor:pointer;
+  /* ================= SLIDE MENU ================= */
 
-}
+  .mobile-side-drawer{
+    display:flex;
+    flex-direction:column;
 
-/* Drawer navigation buttons */
-.mobile-side-drawer .mobile-nav-btn{
-display:flex;
-align-items:center;
-gap:14px;
+    position:fixed;
 
-width:100%;
-padding:14px 12px;
-margin:3px 0;
+    top:10px;
+    left:10px;
 
-border:none;
-border-radius:10px;
+    width:240px;
+    max-width:75vw;
 
-background:transparent;
-color:white;
+    height:auto;
+    max-height:85vh;
 
-font-size:15px;
-text-align:left;
-cursor:pointer;
+    z-index:10002;
 
-}
+    padding:14px 10px;
 
-.mobile-side-drawer .mobile-nav-btn:hover,
-.mobile-side-drawer .mobile-nav-btn.active{
-background:rgba(255,255,255,.10);
-}
+    background:#111827;
 
-.mobile-side-drawer .mobile-nav-btn .icon{
-width:28px;
-font-size:20px;
-text-align:center;
-}
+    border-radius:16px;
 
-/* Give the main content room for the hamburger */
-main{
-margin-left:0 !important;
-padding-top:65px;
-}
+    box-shadow:8px 8px 25px rgba(0,0,0,.3);
+
+    transform:translateX(-120%);
+
+    transition:transform .28s ease;
+
+    overflow-y:auto;
+  }
+
+  .mobile-side-drawer.open{
+    transform:translateX(0);
+  }
+
+
+  /* ================= DRAWER HEADER ================= */
+
+  .mobile-drawer-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:6px 8px 14px;
+
+    margin-bottom:6px;
+
+    color:white;
+
+    font-size:17px;
+  }
+
+
+  /* ================= CLOSE BUTTON ================= */
+
+  .mobile-menu-close{
+    width:36px;
+    height:36px;
+
+    border:none;
+    border-radius:9px;
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    font-size:25px;
+    line-height:1;
+
+    cursor:pointer;
+  }
+
+
+  /* ================= NAVIGATION BUTTONS ================= */
+
+  .mobile-side-drawer .mobile-nav-btn{
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    width:100%;
+
+    padding:12px 10px;
+
+    margin:2px 0;
+
+    border:none;
+    border-radius:9px;
+
+    background:transparent;
+
+    color:white;
+
+    font-size:14px;
+
+    text-align:left;
+
+    cursor:pointer;
+  }
+
+  .mobile-side-drawer .mobile-nav-btn:hover,
+  .mobile-side-drawer .mobile-nav-btn.active{
+    background:rgba(255,255,255,.10);
+  }
+
+  .mobile-side-drawer .mobile-nav-btn .icon{
+    width:26px;
+
+    font-size:19px;
+
+    text-align:center;
+  }
+
+
+  /* ================= MAIN CONTENT ================= */
+
+  main{
+    margin-left:0 !important;
+    padding-top:65px;
+  }
 
 }
 </style>
