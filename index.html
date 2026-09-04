@@ -1239,6 +1239,24 @@ footer{
   }
 
 }
+ @media(max-width:600px){
+
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .logo .mobile-menu-toggle{
+    position:static !important;
+    width:36px;
+    height:36px;
+    padding:0;
+    font-size:22px;
+    flex-shrink:0;
+  }
+
+}
 </style>
 </head>
 
@@ -1293,8 +1311,15 @@ footer{
 <header>
 
  <div class="logo">
-  Trade<span>Journal</span> Pro
- </div>
+  <button
+    class="mobile-menu-toggle"
+    onclick="openMobileMenu()"
+    aria-label="Open menu">
+    ☰
+  </button>
+
+  Trades<span>Journal </span> Pro
+</div>
 
  <div class="user">
 
@@ -3373,10 +3398,6 @@ footer{
     aria-label="Open menu">
     ☰
   </button>
-
-  <div class="mobile-brand">
-    TradeJournal Pro
-  </div>
 
 </div>
  <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div><nav class="mobile-side-drawer" id="mobileSideDrawer">  <div class="mobile-drawer-header">
