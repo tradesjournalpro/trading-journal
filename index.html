@@ -1025,7 +1025,40 @@ footer{
   .mobile-bottom-nav{
     display:none !important;
   }
+/* ================= MOBILE TOP BAR ================= */
 
+.mobile-topbar{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  position:fixed;
+  top:0;
+  left:0;
+
+  width:100%;
+  height:60px;
+
+  padding:8px 15px;
+
+  z-index:10001;
+}
+
+.mobile-menu-toggle{
+  position:static !important;
+
+  flex-shrink:0;
+
+  width:42px;
+  height:42px;
+}
+
+.mobile-brand{
+  color:white;
+  font-size:18px;
+  font-weight:700;
+  white-space:nowrap;
+}
 
   /* ================= TOP BAR ================= */
 
@@ -3331,9 +3364,22 @@ footer{
 </main>
 
 
-<!-- MOBILE MENU --><button class="mobile-menu-toggle" onclick="openMobileMenu()" aria-label="Open menu">
-  ☰
-</button><div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div><nav class="mobile-side-drawer" id="mobileSideDrawer">  <div class="mobile-drawer-header">
+<!-- MOBILE MENU -->
+<div class="mobile-topbar">
+
+  <button
+    class="mobile-menu-toggle"
+    onclick="openMobileMenu()"
+    aria-label="Open menu">
+    ☰
+  </button>
+
+  <div class="mobile-brand">
+    TradeJournal Pro
+  </div>
+
+</div>
+ <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div><nav class="mobile-side-drawer" id="mobileSideDrawer">  <div class="mobile-drawer-header">
     <strong>TradeJournal Pro</strong><button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Close menu">
   ×
 </button>
